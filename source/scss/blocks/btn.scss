@@ -1,7 +1,8 @@
 .btn {
   @include btn-reset;
   position: relative;
-  padding: 1.5rem 2.9rem;
+  //padding: 1.5rem 2.9rem;
+  padding: 1.5rem 4.5rem;
   text-transform: uppercase;
   text-align: center;
   font-family: $font-alt;

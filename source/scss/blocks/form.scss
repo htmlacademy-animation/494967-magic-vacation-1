@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .form__label {
@@ -28,13 +29,14 @@
     pointer-events: auto;
   }
 }
+// TODO Поработать с шириной кнопки. Убрать max-width и как-то иначе зафиксировать
 
 .form__field {
   flex: none;
   margin-right: 3rem;
   padding: 0 5.6rem;
   height: 6rem;
-  width: calc(100% - 21rem);
+  width: 0;
   text-transform: uppercase;
   font: inherit;
   font-size: 2.4rem;
@@ -43,16 +45,36 @@
   border: 0;
   border-radius: 3rem;
   outline: none;
+  transition: width 0.5s ease;
 
   &:focus {
     border: 1px solid $c-purple;
+  }
+
+  .screen--game.active & {
+    width: calc(100% - 21rem);
+
+    @media (min-width: $stop-scaling) {
+      width: calc(100% - 210px);
+    }
+
+    @media (orientation: portrait) {
+      width: calc(100% - 5rem);
+    }
+
+    @media (max-width: $tablet) and (orientation: landscape) {
+      width: calc(100% - 9rem);
+    }
+
+    @media (max-width: $mobile) and (orientation: landscape) {
+      width: calc(100% - 5rem);
+    }
   }
 
   @media (min-width: $stop-scaling) {
     margin-right: 30px;
     padding: 0 56px;
     height: 60px;
-    width: calc(100% - 210px);
     font-size: 24px;
     border-radius: 30px;
   }
@@ -60,26 +82,23 @@
   @media (orientation: portrait) {
     margin-right: 1rem;
     padding: 0 2.5rem;
-    width: calc(100% - 5rem);
     height: 4rem;
     font-size: 1.6rem;
-  }
-
-  @media (max-width: $tablet) and (orientation: landscape) {
-    width: calc(100% - 9rem);
   }
 
   @media (max-width: $mobile) and (orientation: landscape) {
     margin-right: 1rem;
     padding: 0 2.5rem;
-    width: calc(100% - 5rem);
     height: 4rem;
     font-size: 1.6rem;
   }
 }
 
 .form__button {
-  flex-grow: 1;
+  //flex-grow: 1;
+  //width: 100%;
+  right: 0;
+  //max-width: 240px;
 
   @media (orientation: portrait) {
     position: relative;

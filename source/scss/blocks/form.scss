@@ -29,7 +29,6 @@
     pointer-events: auto;
   }
 }
-// TODO Поработать с шириной кнопки. Убрать max-width и как-то иначе зафиксировать
 
 .form__field {
   flex: none;
@@ -95,10 +94,7 @@
 }
 
 .form__button {
-  //flex-grow: 1;
-  //width: 100%;
   right: 0;
-  //max-width: 240px;
 
   @media (orientation: portrait) {
     position: relative;

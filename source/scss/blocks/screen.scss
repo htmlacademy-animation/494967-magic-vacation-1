@@ -39,6 +39,7 @@
 }
 
 .screen__footer {
+  @include fast-transition;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -46,6 +47,11 @@
   color: $c-dark;
   background-color: $c-light;
   z-index: 1;
+  transform: translateY(3rem);
+
+  body.loaded & {
+    transform: translateY(0);
+  }
 
   @media (max-width: $tablet) and (orientation: portrait) {
     width: 3.5rem;

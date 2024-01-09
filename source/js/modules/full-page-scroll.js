@@ -5,6 +5,11 @@ export default class FullPageScroll {
     this.THROTTLE_TIMEOUT = 1000;
     this.scrollFlag = true;
     this.timeout = null;
+    this.withConstantScreen = [
+      'prizes',
+      'rules',
+      'game'
+    ];
 
     this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
@@ -52,14 +57,43 @@ export default class FullPageScroll {
   }
 
   changeVisibilityDisplay() {
-    this.screenElements.forEach((screen) => {
-      screen.classList.add(`screen--hidden`);
-      screen.classList.remove(`active`);
-    });
-    this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
+    let delay = 400;
+    let needDelay = (this.needShowConstantScreen(this.screenElements[this.activeScreen].id)) ? delay : 0;
+
     setTimeout(() => {
-      this.screenElements[this.activeScreen].classList.add(`active`);
-    }, 100);
+      this.screenElements.forEach((screen) => {
+        screen.classList.add(`screen--hidden`);
+        screen.classList.remove(`active`);
+        if (this.withConstantScreen.indexOf(screen.id) !== -1) {
+          screen.style['z-index'] = 2;
+        }
+      });
+      this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
+      setTimeout(() => {
+        this.screenElements[this.activeScreen].classList.add(`active`);
+      }, 100);
+    }, needDelay);
+  }
+
+  needShowConstantScreen(activeScreen) {
+    let isActiveConstScreen = document.getElementById('constantScreen').classList.contains('active');
+    let needConstScreen = this.withConstantScreen.indexOf(activeScreen) !== -1;
+
+    if ((needConstScreen && isActiveConstScreen) || (!needConstScreen && !isActiveConstScreen)) return false;
+    if (needConstScreen) {
+      this.showConstantScreen();
+      return true;
+    }
+    this.hideConstantScreen();
+    return false;
+  }
+
+  showConstantScreen() {
+    document.getElementById('constantScreen').classList.add('active');
+  }
+
+  hideConstantScreen() {
+    document.getElementById('constantScreen').classList.remove('active');
   }
 
   changeActiveMenuItem() {

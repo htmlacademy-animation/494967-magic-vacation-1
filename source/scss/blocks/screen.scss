@@ -360,3 +360,19 @@
 .screen--rules {
   background-color: $c-dark;
 }
+
+.constant-screen {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: $c-dark;
+  transform: translateY(100%);
+  transition: $easy-entry-animation;
+  left: 0;
+  top: 0;
+  z-index: 1;
+
+  &.active {
+    transform: translateY(0);
+  }
+}

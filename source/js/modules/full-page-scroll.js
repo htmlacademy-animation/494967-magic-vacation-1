@@ -58,21 +58,28 @@ export default class FullPageScroll {
 
   changeVisibilityDisplay() {
     let delay = 400;
-    let needDelay = (this.needShowConstantScreen(this.screenElements[this.activeScreen].id)) ? delay : 0;
 
-    setTimeout(() => {
-      this.screenElements.forEach((screen) => {
-        screen.classList.add(`screen--hidden`);
-        screen.classList.remove(`active`);
-        if (this.withConstantScreen.indexOf(screen.id) !== -1) {
-          screen.style['z-index'] = 2;
-        }
-      });
-      this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
+    if (this.needShowConstantScreen(this.screenElements[this.activeScreen].id)) {
       setTimeout(() => {
-        this.screenElements[this.activeScreen].classList.add(`active`);
-      }, 100);
-    }, needDelay);
+        this.changeDisplay();
+      }, delay);
+    } else {
+      this.changeDisplay();
+    }
+  }
+
+  changeDisplay() {
+    this.screenElements.forEach((screen) => {
+      screen.classList.add(`screen--hidden`);
+      screen.classList.remove(`active`);
+      if (this.withConstantScreen.indexOf(screen.id) !== -1) {
+        screen.style['z-index'] = 2;
+      }
+    });
+    this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
+    setTimeout(() => {
+      this.screenElements[this.activeScreen].classList.add(`active`);
+    }, 100);
   }
 
   needShowConstantScreen(activeScreen) {

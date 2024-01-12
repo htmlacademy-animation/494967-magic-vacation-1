@@ -1,0 +1,66 @@
+.rules__item {
+  & > p {
+    opacity: 0;
+    transform: translateX(10%);
+    animation-name: rules-items-text;
+    animation-fill-mode: forwards;
+  }
+
+  &::before {
+    transform: scale(0);
+    animation-name: rules-items-bullet;
+    animation-duration: 0.4s;
+    animation-timing-function: cubic-bezier(.4, .07, .29, 1.8);
+    animation-fill-mode: forwards;
+  }
+
+  &:nth-child(1) {
+    & > p {
+      animation-delay: 0.2s;
+      animation-duration: 0.2s;
+    }
+  }
+
+  &:nth-child(2) {
+    &::before {
+      animation-delay: 0.2s;
+    }
+
+    & > p {
+      animation-delay: 0.4s;
+      animation-duration: 0.4s;
+    }
+  }
+
+  &:nth-child(3) {
+    &::before {
+      animation-delay: 0.4s;
+    }
+
+    & > p {
+      animation-delay: 0.5s;
+      animation-duration: 0.6s;
+    }
+  }
+
+  &:nth-child(4) {
+    &::before {
+      animation-delay: 0.6s;
+    }
+
+    & > p {
+      animation-delay: 0.7s;
+      animation-duration: 0.8s;
+    }
+  }
+}
+
+.rules__link {
+  &::before {
+    opacity: 1;
+    width: 20%;
+    animation-name: btn-go;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+}

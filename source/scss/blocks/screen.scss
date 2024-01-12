@@ -39,15 +39,15 @@
 }
 
 .screen__footer {
-  @include fast-transition;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   color: $c-dark;
   background-color: $c-light;
-  z-index: 1;
-  transform: translateY(3rem);
+  z-index: 20;
+  transform: translateY(5rem);
+  transition: transform 1s cubic-bezier(0.38, 1.13, 0.5, 0.85);
 
   body.loaded & {
     transform: translateY(0);

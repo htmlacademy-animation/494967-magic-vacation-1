@@ -1037,8 +1037,34 @@ img {
   border: none;
   cursor: pointer;
   outline: none;
-  position: relative;
-  padding: 1.5rem 4.5rem;
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 3.5rem;
+  padding: 1.7rem 2.9rem 1.3rem;
+}
+.btn:focus {
+  outline: none;
+}
+.btn:hover > span {
+  color: #a67ee5;
+}
+.btn:focus {
+  width: 103%;
+  height: 108.5%;
+  border-color: #a67ee5;
+}
+.btn:focus > span {
+  color: #a67ee5;
+  outline: none;
+}
+.btn:active, .btn:active:focus {
+  background-color: #a67ee5;
+  border-color: #a67ee5;
+}
+.btn:active > span, .btn:active:focus > span {
+  color: #ffffff;
+}
+.btn > span {
   text-transform: uppercase;
   text-align: center;
   font-family: "Radical", "Arial", sans-serif;
@@ -1047,9 +1073,6 @@ img {
   line-height: 3rem;
   color: #5f458c;
   letter-spacing: -0.04em;
-}
-.btn:focus {
-  outline: none;
 }
 @media (min-width: 2000px) {
   .btn {
@@ -1070,40 +1093,6 @@ img {
     font-size: 1.8rem;
     line-height: 2rem;
   }
-}
-.btn::before {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-color: #ffffff;
-  border: 2px solid #ffffff;
-  border-radius: 3.5rem;
-  z-index: -1;
-}
-.btn:hover {
-  color: #a67ee5;
-}
-.btn:focus {
-  color: #a67ee5;
-  outline: none;
-}
-.btn:focus::before {
-  width: 103%;
-  height: 108.5%;
-  border-color: #a67ee5;
-}
-.btn:active, .btn:active:focus {
-  color: #ffffff;
-}
-.btn:active::before, .btn:active:focus::before {
-  width: 100%;
-  height: 100%;
-  background-color: #a67ee5;
-  border-color: #a67ee5;
 }
 
 .chat {
@@ -1449,8 +1438,10 @@ img {
 }
 
 .form__field {
+  position: relative;
+  right: 0;
   flex: none;
-  margin-right: 3rem;
+  margin-right: 2.8rem;
   padding: 0 5.6rem;
   height: 6rem;
   width: 0;
@@ -1518,6 +1509,37 @@ img {
 
 .form__button {
   right: 0;
+  padding: 1.7rem 4.4rem 1.3rem;
+}
+@media (orientation: portrait) {
+  .form__button:focus {
+    width: 4rem;
+    height: 4rem;
+    color: #a67ee5;
+  }
+}
+@media (max-width: 1024px) and (orientation: landscape) {
+  .form__button:focus {
+    width: 6rem;
+    height: 6rem;
+    color: #a67ee5;
+  }
+}
+@media (max-width: 768px) and (orientation: landscape) {
+  .form__button:focus {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+@media (orientation: portrait) {
+  .form__button:active {
+    color: #ffffff;
+  }
+}
+@media (max-width: 1024px) and (orientation: landscape) {
+  .form__button:active {
+    color: #ffffff;
+  }
 }
 @media (orientation: portrait) {
   .form__button {
@@ -1527,6 +1549,7 @@ img {
     width: 4rem;
     height: 4rem;
     font-size: 0;
+    color: #5f458c;
   }
 }
 @media (max-width: 1024px) and (orientation: landscape) {
@@ -1537,6 +1560,7 @@ img {
     width: 6rem;
     height: 6rem;
     font-size: 0;
+    color: #5f458c;
   }
 }
 @media (max-width: 768px) and (orientation: landscape) {
@@ -1568,6 +1592,19 @@ img {
 @media (max-width: 1024px) and (orientation: landscape) {
   .form__button svg {
     display: block;
+  }
+}
+
+.form__button > span {
+  opacity: 0;
+}
+.screen--game.active .form__button > span {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+@media (max-width: 1024px) {
+  .screen--game.active .form__button > span {
+    opacity: 0;
   }
 }
 
@@ -3068,10 +3105,9 @@ body.loaded .page-header__menu a.active::after {
 }
 
 .rules__item {
-  position: relative;
+  display: flex;
   margin: 0 0 6.2rem;
   padding-top: 0.6rem;
-  padding-left: 6.5rem;
   break-inside: avoid;
 }
 @media (min-width: 2000px) {
@@ -3084,7 +3120,7 @@ body.loaded .page-header__menu a.active::after {
 @media (max-width: 1024px) and (orientation: portrait) {
   .rules__item {
     margin-bottom: 1rem;
-    padding-left: 5rem;
+    padding-left: 0;
   }
 }
 @media (max-width: 1024px) and (orientation: landscape) {
@@ -3094,81 +3130,107 @@ body.loaded .page-header__menu a.active::after {
 }
 @media (max-width: 768px) and (orientation: landscape) {
   .rules__item {
-    padding-left: 5rem;
     font-size: 1.2rem;
   }
 }
-.rules__item::before {
-  content: counter(li);
-  counter-increment: li;
-  position: absolute;
-  top: 0;
-  left: 0;
+
+.rules__item-bullet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 4.5rem;
   height: 4.5rem;
+  background-color: #a67ee5;
+  border-radius: 50%;
+}
+@media (max-width: 1024px) and (orientation: portrait) {
+  .rules__item-bullet {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+@media (max-width: 768px) and (orientation: landscape) {
+  .rules__item-bullet {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.rules__item-number {
+  height: 100%;
+}
+.rules__item-number::before {
+  content: counter(li);
+  counter-increment: li;
   font-family: "Radical", "Arial", sans-serif;
   font-weight: 400;
   font-size: 2.4rem;
-  background-color: #a67ee5;
-  border-radius: 50%;
   line-height: 5rem;
-  text-align: center;
 }
 @media (max-width: 1024px) and (orientation: portrait) {
-  .rules__item::before {
-    top: 1rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    line-height: 3rem;
+  .rules__item-number::before {
+    line-height: 2.8rem;
     font-size: 1.4rem;
   }
 }
 @media (max-width: 768px) and (orientation: landscape) {
-  .rules__item::before {
-    top: 0.6rem;
-    width: 2.5rem;
-    height: 2.5rem;
+  .rules__item-number::before {
     line-height: 3rem;
     font-size: 1.4rem;
   }
 }
-.rules__item p {
+
+.rules__item-text {
   margin: 0;
+  padding-left: 2rem;
 }
 @media (max-width: 1024px) and (orientation: portrait) {
-  .rules__item p {
+  .rules__item-text {
     min-height: calc(1.4rem * 2.2);
   }
 }
 
-.rules__link {
+.rules__link-wrapper {
   position: absolute;
   bottom: 6rem;
   right: 5.6rem;
+  display: flex;
+  justify-content: flex-end;
 }
 @media (min-width: 2000px) {
-  .rules__link {
+  .rules__link-wrapper {
     bottom: 60px;
     right: 56px;
   }
 }
 @media (max-width: 1024px) and (orientation: portrait) {
-  .rules__link {
+  .rules__link-wrapper {
     left: 0;
     right: 0;
     bottom: 4rem;
   }
 }
 @media (max-width: 1024px) and (orientation: landscape) {
-  .rules__link {
+  .rules__link-wrapper {
     bottom: 5rem;
   }
 }
 @media (max-width: 768px) and (orientation: landscape) {
-  .rules__link {
+  .rules__link-wrapper {
     bottom: 2rem;
     right: 1.5rem;
   }
+}
+
+.rules__link {
+  display: block;
+  position: relative;
+  right: 0;
+}
+
+.screen--rules.screen--hidden .rules__link-btn-text {
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 .screen {
@@ -3968,8 +4030,7 @@ body.loaded .screen__footer {
   z-index: -1;
   position: absolute;
   transform: scale(0);
-  transition: all 0.4s ease;
-  animation: pulse-social-icon 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0.07, 0.29, 1.8);
 }
 body.loaded .social-block__toggler::before {
   transform: scale(1);
@@ -4187,78 +4248,115 @@ body.loaded .social-block__toggler::before {
   }
 }
 
-@keyframes pulse-social-icon {
-  from {
-    transform: scale(0);
-  }
-  80% {
-    transform: scale(1.1);
-  }
+@keyframes stretch-ball-show {
   to {
     transform: scale(1);
   }
 }
-.rules__item > p {
-  opacity: 0;
-  transform: translateX(10%);
-  animation-name: rules-items-text;
-  animation-fill-mode: forwards;
+@keyframes opacity-width-show-btn {
+  to {
+    opacity: 1;
+    width: 100%;
+  }
 }
-.rules__item::before {
-  transform: scale(0);
-  animation-name: rules-items-bullet;
-  animation-duration: 0.4s;
-  animation-timing-function: cubic-bezier(0.4, 0.07, 0.29, 1.8);
-  animation-fill-mode: forwards;
+@keyframes opacity-show-btn-text {
+  to {
+    opacity: 1;
+  }
 }
-.rules__item:nth-child(1) > p {
+@keyframes show-text-from-opacity {
+  to {
+    opacity: 1;
+  }
+}
+.rules__item:nth-child(1) .rules__item-number::before {
+  animation-delay: 0.1s;
+}
+.rules__item:nth-child(1) .rules__item-text {
   animation-delay: 0.2s;
-  animation-duration: 0.2s;
+  animation-duration: 0.5s;
 }
-.rules__item:nth-child(2)::before {
+.rules__item:nth-child(2) .rules__item-bullet {
   animation-delay: 0.2s;
 }
-.rules__item:nth-child(2) > p {
-  animation-delay: 0.4s;
-  animation-duration: 0.4s;
+.rules__item:nth-child(2) .rules__item-number::before {
+  animation-delay: 0.3s;
 }
-.rules__item:nth-child(3)::before {
+.rules__item:nth-child(2) .rules__item-text {
   animation-delay: 0.4s;
-}
-.rules__item:nth-child(3) > p {
-  animation-delay: 0.5s;
   animation-duration: 0.6s;
 }
-.rules__item:nth-child(4)::before {
+.rules__item:nth-child(3) .rules__item-bullet {
+  animation-delay: 0.4s;
+}
+.rules__item:nth-child(3) .rules__item-number::before {
+  animation-delay: 0.5s;
+}
+.rules__item:nth-child(3) .rules__item-text {
+  animation-delay: 0.5s;
+  animation-duration: 0.7s;
+}
+.rules__item:nth-child(4) .rules__item-bullet {
   animation-delay: 0.6s;
 }
-.rules__item:nth-child(4) > p {
+.rules__item:nth-child(4) .rules__item-number::before {
+  animation-delay: 0.7s;
+}
+.rules__item:nth-child(4) .rules__item-text {
   animation-delay: 0.7s;
   animation-duration: 0.8s;
 }
 
-.rules__link::before {
-  opacity: 1;
-  width: 20%;
-  animation-name: btn-go;
-  animation-duration: 1s;
+.rules__item-bullet {
+  animation-name: stretch-ball-show;
+  transform: scale(0);
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.4, 0.07, 0.29, 1.8);
   animation-fill-mode: forwards;
 }
 
-@keyframes rules-items-bullet {
-  to {
-    transform: scale(1);
+.rules__item-number::before {
+  animation-name: show-text-from-opacity;
+  animation-duration: 0.4s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.rules__item-text {
+  opacity: 0;
+  transform: translateX(20%);
+  animation-name: rules-items-text;
+  animation-fill-mode: forwards;
+}
+
+.rules__link {
+  opacity: 0;
+  width: 10%;
+  animation-name: opacity-width-show-btn;
+  animation-duration: 0.5s;
+  animation-delay: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+.rules__link-btn-text {
+  opacity: 0;
+  animation-name: opacity-show-btn-text;
+  animation-duration: 0.5s;
+  animation-delay: 1.1s;
+  animation-fill-mode: forwards;
+}
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  .screen--rules.screen--hidden .rules__link {
+    width: 10%;
+    transition: width 0.5s ease;
   }
 }
+
 @keyframes rules-items-text {
   to {
     opacity: 1;
     transform: translateX(0);
-  }
-}
-@keyframes btn-go {
-  to {
-    width: 100%;
   }
 }
 

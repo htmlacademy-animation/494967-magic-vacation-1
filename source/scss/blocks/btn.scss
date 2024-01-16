@@ -1,16 +1,47 @@
 .btn {
   @include btn-reset;
-  position: relative;
-  //padding: 1.5rem 2.9rem;
-  padding: 1.5rem 4.5rem;
-  text-transform: uppercase;
-  text-align: center;
-  font-family: $font-alt;
-  font-weight: 400;
-  font-size: 2.4rem;
-  line-height: 3rem;
-  color: $c-dark;
-  letter-spacing: -0.04em;
+  background-color: $c-light;
+  border: 2px solid $c-light;
+  border-radius: 3.5rem;
+  padding: 1.7rem 2.9rem 1.3rem;
+
+  &:hover {
+    & > span {
+      color: $c-purple;
+    }
+  }
+
+  &:focus {
+    width: 103%;
+    height: 108.5%;
+    border-color: $c-purple;
+
+    & > span {
+      color: $c-purple;
+      outline: none;
+    }
+  }
+
+  &:active,
+  &:active:focus {
+    background-color: $c-purple;
+    border-color: $c-purple;
+
+    & > span {
+      color: $c-light;
+    }
+  }
+
+  & > span {
+    text-transform: uppercase;
+    text-align: center;
+    font-family: $font-alt;
+    font-weight: 400;
+    font-size: 2.4rem;
+    line-height: 3rem;
+    color: $c-dark;
+    letter-spacing: -0.04em;
+  }
 
   @media (min-width: $stop-scaling) {
     padding: 15px 29px;
@@ -27,43 +58,5 @@
     padding: 1rem;
     font-size: 1.8rem;
     line-height: 2rem;
-  }
-
-  &::before {
-    @include center;
-    content: "";
-    width: 100%;
-    height: 100%;
-    background-color: $c-light;
-    border: 2px solid $c-light;
-    border-radius: 3.5rem;
-    z-index: -1;
-  }
-
-  &:hover {
-    color: $c-purple;
-  }
-
-  &:focus {
-    color: $c-purple;
-    outline: none;
-
-    &::before {
-      width: 103%;
-      height: 108.5%;
-      border-color: $c-purple;
-    }
-  }
-
-  &:active,
-  &:active:focus {
-    color: $c-light;
-
-    &::before {
-      width: 100%;
-      height: 100%;
-      background-color: $c-purple;
-      border-color: $c-purple;
-    }
   }
 }

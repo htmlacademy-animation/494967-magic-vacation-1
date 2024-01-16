@@ -1,11 +1,24 @@
-@keyframes pulse-social-icon {
-  from {
-    transform: scale(0);
-  }
-  80% {
-    transform: scale(1.1);
-  }
+@keyframes stretch-ball-show {
   to {
     transform: scale(1);
+  }
+}
+
+@keyframes opacity-width-show-btn {
+  to {
+    opacity: 1;
+    width: 100%;
+  }
+}
+
+@keyframes opacity-show-btn-text {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes show-text-from-opacity {
+  to {
+    opacity: 1;
   }
 }

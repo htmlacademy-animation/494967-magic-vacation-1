@@ -1,0 +1,14 @@
+@mixin stretch-ball-show {
+  animation-name: stretch-ball-show;
+  transform: scale(0);
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.4, 0.07, 0.29, 1.8);
+  animation-fill-mode: forwards;
+}
+
+@mixin show-text-from-opacity {
+  animation-name: show-text-from-opacity;
+  animation-duration: 0.4s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}

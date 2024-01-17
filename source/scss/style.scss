@@ -6,7 +6,6 @@
 @import "general/scaffolding.scss";
 
 // Blocks
-@import "blocks/keyframes.scss";
 @import "blocks/animation-screen.scss";
 @import "blocks/btn.scss";
 @import "blocks/chat.scss";
@@ -21,3 +20,9 @@
 @import "blocks/screen.scss";
 @import "blocks/slider.scss";
 @import "blocks/social-block.scss";
+
+// Animations
+@import "animations/mixin-animations";
+@import "animations/keyframes";
+@import "animations/rules/animation";
+@import "animations/rules/keyframe";

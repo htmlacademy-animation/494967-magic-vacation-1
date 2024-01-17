@@ -1,0 +1,98 @@
+.rules__item {
+  &:nth-child(1) {
+    & .rules__item-number::before {
+      animation-delay: 0.1s;
+    }
+
+    & .rules__item-text {
+      animation-delay: 0.2s;
+      animation-duration: 0.5s;
+    }
+  }
+
+  &:nth-child(2) {
+    & .rules__item-bullet {
+      animation-delay: 0.2s;
+    }
+
+    & .rules__item-number::before {
+      animation-delay: 0.3s;
+    }
+
+    & .rules__item-text {
+      animation-delay: 0.4s;
+      animation-duration: 0.6s;
+    }
+  }
+
+  &:nth-child(3) {
+    & .rules__item-bullet {
+      animation-delay: 0.4s;
+    }
+
+    & .rules__item-number::before {
+      animation-delay: 0.5s;
+    }
+
+    & .rules__item-text {
+      animation-delay: 0.5s;
+      animation-duration: 0.7s;
+    }
+  }
+
+  &:nth-child(4) {
+    & .rules__item-bullet {
+      animation-delay: 0.6s;
+    }
+
+    & .rules__item-number::before {
+      animation-delay: 0.7s;
+    }
+
+    & .rules__item-text {
+      animation-delay: 0.7s;
+      animation-duration: 0.8s;
+    }
+  }
+}
+
+.rules__item-bullet {
+  @include stretch-ball-show;
+}
+
+.rules__item-number::before {
+  @include show-text-from-opacity;
+}
+
+.rules__item-text {
+  opacity: 0;
+  transform: translateX(20%);
+  animation-name: rules-items-text;
+  animation-fill-mode: forwards;
+}
+
+.rules__link {
+  opacity: 0;
+  width: 10%;
+  animation-name: opacity-width-show-btn;
+  animation-duration: $opacity-show-text-duration;
+  animation-delay: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+.rules__link-btn-text {
+  opacity: 0;
+  animation-name: opacity-show-btn-text;
+  animation-duration: $opacity-show-text-duration;
+  animation-delay: 1.1s;
+  animation-fill-mode: forwards;
+}
+
+.screen--rules.screen--hidden {
+  @media (max-width: $tablet) and (orientation: portrait) {
+    & .rules__link {
+      width: 10%;
+      transition: width 0.5s ease;
+    }
+  }
+}

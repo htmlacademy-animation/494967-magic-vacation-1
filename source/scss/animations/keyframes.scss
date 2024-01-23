@@ -1,24 +1,31 @@
-@keyframes stretch-ball-show {
+@keyframes bounceIn {
   to {
     transform: scale(1);
   }
 }
 
-@keyframes opacity-width-show-btn {
+@keyframes untwistFadeIn {
   to {
     opacity: 1;
     width: 100%;
   }
 }
 
-@keyframes opacity-show-btn-text {
+@keyframes fadeIn {
   to {
     opacity: 1;
   }
 }
 
-@keyframes show-text-from-opacity {
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInRight {
   to {
     opacity: 1;
+    transform: translateX(0);
   }
 }

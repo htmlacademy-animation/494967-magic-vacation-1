@@ -1,0 +1,21 @@
+.anim-title__word {
+  margin: -1.8rem 1rem 0 0;
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  padding-top: 2rem;
+
+  & > span {
+    will-change: transform;
+    transform: translate3d(0, 120%, 0);
+    display: inline-block;
+  }
+
+  &.active > span {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.anim-title-space {
+  margin-right: 1rem;
+}

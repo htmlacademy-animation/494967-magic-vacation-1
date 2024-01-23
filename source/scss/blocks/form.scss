@@ -180,8 +180,7 @@
   opacity: 0;
 
   .screen--game.active & {
-    opacity: 1;
-    transition: $opacity-text-animation;
+    @include fadeIn;
 
     @media (max-width: $tablet) {
       opacity: 0;

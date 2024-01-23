@@ -326,7 +326,7 @@
       </div>
     </section>
 
-    <section class="screen screen--hidden screen--game" id="game">
+    <section class="screen screen--hidden screen--game" style="display: none;" id="game">
       <div class="screen__wrapper">
         <div class="game">
           <div class="game__header">
@@ -417,14 +417,16 @@
       </div>
     </section>
 
-    <section class="screen screen--hidden screen--result" id="result2">
+<!--    <section class="screen screen--hidden screen--result" id="result2">-->
+    <section class="screen screen--result active" style="opacity: 1" id="result2">
       <div class="screen__wrapper">
         <div class="result result--prize">
           <div class="result__image">
-            <picture>
-              <source srcset="img/result2-mob.png 1x, img/result2-mob@2x.png 2x" media="(max-width: 768px) and (orientation: portrait)">
-              <img src="img/result2.png" srcset="img/result2@2x.png 2x" alt="">
-            </picture>
+            <img class="result2__image result2__image--leaf-left" src="img/module-2/win-suitcase/leaf%20blue%202.png" alt="">
+            <img class="result2__image result2__image--leaf-right" src="img/module-2/win-suitcase/leaf%20blue%201.png" alt="">
+            <img class="result2__image result2__image--leaf-green" src="img/module-2/win-suitcase/leaf%20green.png" alt="">
+            <img class="result2__image result2__image--flamingo" src="img/module-2/win-suitcase/flamingo.png" alt="">
+            <img class="result2__image result2__image--suitcase" src="img/module-2/win-suitcase/suitcase.png" alt="">
           </div>
           <h2 class="result__title">
             <span class="visually-hidden">ПОбеда!</span>

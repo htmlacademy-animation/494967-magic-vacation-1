@@ -231,7 +231,6 @@
 
 .screen--rules.screen--hidden {
   & .rules__link-btn-text {
-    opacity: 0;
-    transition: $opacity-text-animation;
+    @include fadeOut;
   }
 }

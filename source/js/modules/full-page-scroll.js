@@ -1,4 +1,5 @@
 import throttle from 'lodash/throttle';
+import PageSwitchHandler from './page-switch-handler';
 
 export default class FullPageScroll {
   constructor() {
@@ -17,6 +18,8 @@ export default class FullPageScroll {
     this.activeScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
+
+    this.pageSwitcher = new PageSwitchHandler();
   }
 
   init() {
@@ -53,6 +56,7 @@ export default class FullPageScroll {
   changePageDisplay() {
     this.changeVisibilityDisplay();
     this.changeActiveMenuItem();
+    this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
     this.emitChangeDisplayEvent();
   }
 

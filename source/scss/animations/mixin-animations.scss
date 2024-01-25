@@ -6,6 +6,13 @@
   animation-fill-mode: forwards;
 }
 
+@mixin zoomIn {
+  animation-name: bounceIn;
+  transform: scale(0);
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+}
+
 @mixin fadeIn {
   animation-name: fadeIn;
   animation-duration: 0.4s;

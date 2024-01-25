@@ -22,7 +22,7 @@
   }
 }
 
-.result__image {
+.result__images {
   position: absolute;
   top: 0;
   left: 0;
@@ -37,6 +37,10 @@
   @media (orientation: portrait) {
     left: -1rem;
     right: -1rem;
+  }
+
+  @media (max-width: $mobile) {
+    transform: translate3d(2rem, 0, 0);
   }
 
   picture {
@@ -54,34 +58,72 @@
   }
 }
 
-img.result2__image {
+.result2__image-wrap {
   position: absolute;
 
   &--leaf-left {
-    width: 279px;
-    height: 241px;
-    transform: translate3d(-70%, 80%, 0);
+    @include rotateLeafLeft;
+    transform: rotate(30deg) translate3d(-50%, 70%, 0);
+    width: 340px;
+    height: 330px;
   }
 
   &--leaf-right {
+    @include rotateLeafRight;
+    transform: rotate(-30deg) translate3d(50%, 40%, 0);
     width: 279px;
     height: 261px;
-    transform: translate3d(50%, 40%, 0);
   }
 
   &--leaf-green {
+    @include rotateLeafGreen;
+    transform: rotate(-10deg) translate3d(46%, 115%, 0);
     width: 332px;
     height: 159px;
   }
 
+  &--suitcase {
+    @include slideInUpRightSuitcase;
+    width: 340px;
+    height: 330px;
+  }
+
   &--flamingo {
-    width: 300px;
-    height: 300px;
+    @include slideUpDownFlamingo;
+    transform-origin: 10% 100%;
+    width: 240px;
+    height: 270px;
+  }
+}
+
+img.result2__image {
+  &--leaf-left {
+    @include fadeIn;
+    animation-delay: 0.4s;
+    width: 279px;
+    height: 241px;
+  }
+
+  &--leaf-right {
+    @include fadeIn;
+    animation-delay: 0.4s;
+    width: 279px;
+    height: 261px;
+  }
+
+  &--leaf-green {
+    @include fadeIn;
+    animation-delay: 0.6s;
+    width: 332px;
+    height: 159px;
   }
 
   &--suitcase {
-    width: 300px;
-    height: 300px;
+    @include zoomIn;
+  }
+
+  &--flamingo {
+    @include fadeInUpFlamingo;
   }
 }
 

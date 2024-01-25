@@ -97,7 +97,6 @@ export default class AccentTypography {
 
   runAnimation() {
     if (!this.element) return;
-
     this.prepareText();
   }
 

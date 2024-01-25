@@ -1,0 +1,87 @@
+@keyframes rotateLeafLeft {
+  from {
+    transform: rotate(30deg) translate3d(-50%, 70%, 0);
+  }
+  20% {
+    transform: rotate(-6deg) translate3d(-50%, 70%, 0);
+  }
+  40% {
+    transform: rotate(8deg) translate3d(-50%, 70%, 0);
+  }
+  60% {
+    transform: rotate(-2deg) translate3d(-50%, 70%, 0);
+  }
+  80% {
+    transform: rotate(2deg) translate3d(-50%, 70%, 0);
+  }
+  to {
+    transform: rotate(0) translate3d(-50%, 70%, 0);
+  }
+}
+
+@keyframes rotateLeafRight {
+  from {
+    transform: rotate(-30deg) translate3d(50%, 40%, 0);
+  }
+  20% {
+    transform: rotate(6deg) translate3d(50%, 40%, 0);
+  }
+  40% {
+    transform: rotate(-8deg) translate3d(50%, 40%, 0);
+  }
+  60% {
+    transform: rotate(2deg) translate3d(50%, 40%, 0);
+  }
+  80% {
+    transform: rotate(-2deg) translate3d(50%, 40%, 0);
+  }
+  to {
+    transform: rotate(0) translate3d(50%, 40%, 0);
+  }
+}
+
+@keyframes rotateLeafGreen {
+  from {
+    transform: rotate(-10deg) translate3d(46%, 115%, 0);
+  }
+  20% {
+    transform: rotate(6deg) translate3d(46%, 115%, 0);
+  }
+  40% {
+    transform: rotate(-6deg) translate3d(46%, 115%, 0);
+  }
+  60% {
+    transform: rotate(2deg) translate3d(46%, 115%, 0);
+  }
+  80% {
+    transform: rotate(-2deg) translate3d(46%, 115%, 0);
+  }
+  to {
+    transform: rotate(0) translate3d(46%, 115%, 0);
+  }
+}
+
+@keyframes slideInUpRightSuitcase {
+  from {
+    transform: translate3d(-10%, 80%, 0);
+  }
+  75% {
+    transform: translate3d(-10%, 42%, 0);
+  }
+  to {
+    transform: translate3d(-10%, 45%, 0);
+  }
+}
+
+@keyframes fadeInUpFlamingo {
+  to {
+    opacity: 1;
+    transform: rotate(-2deg) translate3d(0, -20%, 0);
+  }
+}
+
+@keyframes slideUpDownFlamingo {
+  to {
+    transform: rotate(-5deg) translate3d(-36%, 90%, 0);
+  }
+}

@@ -42,7 +42,7 @@
     z-index: -1;
     position: absolute;
     transform: scale(0);
-    transition: $stretch-ball-show-animation;
+    transition: $bounce-in-animation;
 
     body.loaded & {
       transform: scale(1);

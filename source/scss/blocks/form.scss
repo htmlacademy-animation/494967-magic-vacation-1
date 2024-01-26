@@ -54,7 +54,7 @@
     border: 1px solid $c-purple;
   }
 
-  .screen--game.active & {
+  .screen.active & {
     width: calc(100% - 21rem);
 
     @media (min-width: $stop-scaling) {
@@ -178,35 +178,35 @@
 
 .form__button > span {
   opacity: 0;
+  transition: opacity 0.5s ease;
+}
 
-  .screen--game.active & {
-    opacity: 1;
-    transition: $opacity-text-animation;
+.screen.active .form__button > span,
+.screen--show .form__button > span {
+  opacity: 1;
 
-    @media (max-width: $tablet) {
-      opacity: 0;
-    }
+  @media (max-width: $tablet) {
+    opacity: 0;
   }
 }
 
-.form--result {
-  .form__field {
-    width: calc(100% - 31rem);
+//TODO Fix move field
+.screen--show .form--result .form__field {
+  width: calc(100% - 31rem);
 
-    @media (min-width: $stop-scaling) {
-      width: calc(100% - 310px);
-    }
+  @media (min-width: $stop-scaling) {
+    width: calc(100% - 310px);
+  }
 
-    @media (orientation: portrait) {
-      width: calc(100% - 5rem);
-    }
+  @media (orientation: portrait) {
+    width: calc(100% - 5rem);
+  }
 
-    @media (max-width: $tablet) and (orientation: landscape) {
-      width: calc(100% - 9rem);
-    }
+  @media (max-width: $tablet) and (orientation: landscape) {
+    width: calc(100% - 9rem);
+  }
 
-    @media (max-width: $mobile) and (orientation: landscape) {
-      width: calc(100% - 5rem);
-    }
+  @media (max-width: $mobile) and (orientation: landscape) {
+    width: calc(100% - 5rem);
   }
 }

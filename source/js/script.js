@@ -1,5 +1,5 @@
 // modules
-import common from './modules/common.js';
+import common from './common.js';
 import mobileHeight from './modules/mobile-height-adjust.js';
 import slider from './modules/slider.js';
 import menu from './modules/menu.js';

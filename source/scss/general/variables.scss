@@ -22,6 +22,5 @@ $index: 1.38871;
 
 //Animations transition
 $opacity-show-text-duration: 0.5s;
-$entry-const-screen-animation: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-$stretch-ball-show-animation: transform 0.4s cubic-bezier(0.4, 0.07, 0.29, 1.8);
+$bounce-in-animation: transform 0.4s cubic-bezier(0.4, 0.07, 0.29, 1.8);
 $opacity-text-animation: opacity $opacity-show-text-duration ease;

@@ -366,13 +366,14 @@
   width: 100vw;
   height: 100vh;
   background-color: $c-dark;
-  transform: translateY(100%);
-  transition: $entry-const-screen-animation;
+  transform: translate3d(0, 100%, 0);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: 2;
 
   &.active {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 }

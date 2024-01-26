@@ -1,15 +1,11 @@
 import throttle from 'lodash/throttle';
+import PageSwitchHandler from './page-switch-handler';
 
 export default class FullPageScroll {
   constructor() {
     this.THROTTLE_TIMEOUT = 1000;
     this.scrollFlag = true;
     this.timeout = null;
-    this.withConstantScreen = [
-      'prizes',
-      'rules',
-      'game'
-    ];
 
     this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
@@ -17,6 +13,17 @@ export default class FullPageScroll {
     this.activeScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
+
+    this.pageSwitcher = new PageSwitchHandler();
+
+    this.constantScreenElement = document.getElementById('constantScreen');
+    this.withConstantScreen = [
+      'prizes',
+      'rules',
+      'game'
+    ];
+    this.durationConstScreenAnimation = 500;
+    this.delayConstScreenAnimation = 400;
   }
 
   init() {
@@ -57,24 +64,29 @@ export default class FullPageScroll {
   }
 
   changeVisibilityDisplay() {
-    let delay = 400;
-
-    if (this.needShowConstantScreen(this.screenElements[this.activeScreen].id)) {
+    if (this.needSlideInUpConstScreen()) {
+      this.showConstantScreen();
       setTimeout(() => {
         this.changeDisplay();
-      }, delay);
+        this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
+      }, this.delayConstScreenAnimation);
+    } else if (this.needSlideOutDownConstScreen()) {
+      this.hideConstantScreen();
+      setTimeout(() => {
+        this.changeDisplay();
+        this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
+      }, this.delayConstScreenAnimation);
     } else {
       this.changeDisplay();
+      this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
     }
   }
 
+  //TODO Fix outDown Const screen
   changeDisplay() {
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
       screen.classList.remove(`active`);
-      if (this.withConstantScreen.indexOf(screen.id) !== -1) {
-        screen.style['z-index'] = 2;
-      }
     });
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
     setTimeout(() => {
@@ -82,25 +94,40 @@ export default class FullPageScroll {
     }, 100);
   }
 
-  needShowConstantScreen(activeScreen) {
-    let isActiveConstScreen = document.getElementById('constantScreen').classList.contains('active');
-    let needConstScreen = this.withConstantScreen.indexOf(activeScreen) !== -1;
+  needSlideInUpConstScreen() {
+    let isActiveConstScreen = this.constantScreenElement.classList.contains('active');
+    return this.needConstScreen() && !isActiveConstScreen;
+  }
 
-    if ((needConstScreen && isActiveConstScreen) || (!needConstScreen && !isActiveConstScreen)) return false;
-    if (needConstScreen) {
-      this.showConstantScreen();
-      return true;
-    }
-    this.hideConstantScreen();
-    return false;
+  needConstScreen() {
+    return this.withConstantScreen.indexOf(this.screenElements[this.activeScreen].id) !== -1;
+  }
+
+  needSlideOutDownConstScreen() {
+    let isActiveConstScreen = this.constantScreenElement.classList.contains('active');
+    return !this.needConstScreen() && isActiveConstScreen;
+  }
+
+  upLayoutConstScreen() {
+    this.constantScreenElement.style['z-index'] = 2;
+    let elem = document.getElementById(this.screenElements[this.activeScreen].id);
+    elem.style['z-index'] = 1;
+  }
+
+  downLayoutConstScreen() {
+    this.constantScreenElement.style['z-index'] = 0;
   }
 
   showConstantScreen() {
-    document.getElementById('constantScreen').classList.add('active');
+    this.constantScreenElement.classList.add('active');
+    setTimeout(() => {
+      this.downLayoutConstScreen();
+    }, this.durationConstScreenAnimation)
   }
 
   hideConstantScreen() {
-    document.getElementById('constantScreen').classList.remove('active');
+    this.upLayoutConstScreen();
+    this.constantScreenElement.classList.remove('active');
   }
 
   changeActiveMenuItem() {

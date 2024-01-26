@@ -1,0 +1,48 @@
+@mixin rotateLeafLeft {
+  animation-name: rotateLeafLeft;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-delay: 0.4s;
+}
+
+@mixin rotateLeafRight {
+  animation-name: rotateLeafRight;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-delay: 0.4s;
+}
+
+@mixin rotateLeafGreen {
+  animation-name: rotateLeafGreen;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-delay: 0.6s;
+}
+
+@mixin slideInUpRightSuitcase {
+  animation-name: slideInUpRightSuitcase;
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+}
+
+@mixin fadeInUpFlamingo {
+  animation-name: fadeInUpFlamingo;
+  transform: rotate(-20deg) translate3d(0, 40%, 0);
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@mixin slideUpDownFlamingo {
+  animation-name: slideUpDownFlamingo;
+  transform: rotate(0) translate3d(-36%, 80%, 0);
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-delay: 0.4s;
+  animation-direction: alternate;
+  animation-timing-function: ease-out;
+}

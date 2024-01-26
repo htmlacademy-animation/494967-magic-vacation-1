@@ -5,7 +5,16 @@
 @import "general/fonts.scss";
 @import "general/scaffolding.scss";
 
+// Animations
+@import "animations/mixin-animations.scss";
+@import "animations/keyframes.scss";
+@import "animations/rules/animation.scss";
+@import "animations/intro/animation.scss";
+@import "animations/result/mixins.scss";
+@import "animations/result/keyframes.scss";
+
 // Blocks
+@import "blocks/common.scss";
 @import "blocks/animation-screen.scss";
 @import "blocks/btn.scss";
 @import "blocks/chat.scss";
@@ -20,9 +29,3 @@
 @import "blocks/screen.scss";
 @import "blocks/slider.scss";
 @import "blocks/social-block.scss";
-
-// Animations
-@import "animations/mixin-animations";
-@import "animations/keyframes";
-@import "animations/rules/animation";
-@import "animations/rules/keyframe";

@@ -64,35 +64,35 @@
   &--leaf-left {
     @include rotateLeafLeft;
     transform: rotate(30deg) translate3d(-50%, 70%, 0);
-    width: 24%;
-    height: 34%;
+    width: 340px;
+    height: 330px;
   }
 
   &--leaf-right {
     @include rotateLeafRight;
     transform: rotate(-30deg) translate3d(50%, 40%, 0);
-    width: 20%;
-    height: 27%;
+    width: 279px;
+    height: 261px;
   }
 
   &--leaf-green {
     @include rotateLeafGreen;
     transform: rotate(-10deg) translate3d(46%, 115%, 0);
-    width: 24%;
-    height: 17%;
+    width: 332px;
+    height: 159px;
   }
 
   &--suitcase {
     @include slideInUpRightSuitcase;
-    width: 25%;
-    height: 35%;
+    width: 340px;
+    height: 330px;
   }
 
   &--flamingo {
     @include slideUpDownFlamingo;
     transform-origin: 10% 100%;
-    width: 16%;
-    height: 26%;
+    width: 240px;
+    height: 270px;
   }
 }
 

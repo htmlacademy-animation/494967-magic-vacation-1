@@ -2,6 +2,7 @@ import throttle from 'lodash/throttle';
 import PageSwitchHandler from './page-switch-handler';
 import FooterNote from "./footer-note";
 import BackgroundInUp from "./background-in-up";
+import {getClassNameSlider} from './slider';
 
 export default class FullPageScroll {
   constructor() {
@@ -58,6 +59,7 @@ export default class FullPageScroll {
   }
 
   changeVisibilityDisplay() {
+    this.changeSliderClass();
     const backgroundInUp = new BackgroundInUp(this.activeScreen);
     let needDelay = 0;
     if (backgroundInUp.needSlideInUpConstScreen()) {
@@ -80,6 +82,17 @@ export default class FullPageScroll {
       const footerNote = new FooterNote(this.screenElements[this.activeScreen].id);
       footerNote.run();
     }, needDelay);
+  }
+
+  changeSliderClass() {
+    if (this.screenElements[this.activeScreen].id === 'story') {
+      const index = [...document.querySelectorAll('.swiper-slide')].findIndex((elem) => {
+        return elem.classList.contains('swiper-slide-active');
+      });
+      document.body.classList.add(getClassNameSlider(index));
+    } else {
+      document.body.classList.remove('slide1', 'slide2', 'slide3', 'slide4');
+    }
   }
 
   changeActiveMenuItem() {

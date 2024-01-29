@@ -299,3 +299,52 @@
     }
   }
 }
+
+@for $i from 1 through 3 {
+  body.slide#{$i} {
+    .page-header__menu a {
+      &:hover,
+      &:focus {
+        color: nth($c-second-slide, $i);
+
+        &::after {
+          background-color: nth($c-second-slide, $i);
+        }
+      }
+    }
+
+    .social-block--active .social-block__toggler {
+      color: nth($c-second-slide, $i);
+    }
+
+    .social-block__toggler {
+      color: nth($c-first-slide, $i);
+
+      &:hover {
+        color: nth($c-second-slide, $i);
+      }
+
+      &:focus {
+        color: nth($c-second-slide, $i);
+
+        &::before {
+          border-color: nth($c-second-slide, $i);
+        }
+      }
+
+      &:active,
+      &:active:focus {
+        color: $c-light;
+
+        &::before {
+          background-color: nth($c-second-slide, $i);
+          border-color: nth($c-second-slide, $i);
+        }
+      }
+    }
+
+    .social-block__link:hover {
+      color: nth($c-second-slide, $i);
+    }
+  }
+}

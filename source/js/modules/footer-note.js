@@ -50,7 +50,6 @@ export default class FooterNote {
   fadeInText(transition = false) {
     this.resetActiveText();
     this.opacityElement.classList.add('active');
-    console.log(this.opacityElement);
     if (transition) this.opacityElement.classList.add('transition');
   }
 

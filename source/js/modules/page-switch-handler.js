@@ -29,7 +29,6 @@ export default class PageSwitchHandler {
     };
   }
 
-
   runAnimations(sectionId) {
     if (this.scriptRunSchema[sectionId]) {
       [...this.scriptRunSchema[sectionId]].forEach((func) => func());

@@ -178,6 +178,8 @@ img.result2__image {
 
 .result__button {
   @include btn-reset;
+  @include fadeIn;
+  animation-delay: 0.5s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -215,11 +217,16 @@ img.result2__image {
   }
 
   span {
+    @include rotateInRight;
+    animation-delay: 0.5s;
     position: relative;
     margin-left: 1.5rem;
-    width: 4rem;
-    height: 4rem;
+    width: 4.2rem;
+    height: 4.2rem;
     color: $c-dark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @media (min-width: $stop-scaling) {
       margin-left: 15px;
@@ -228,14 +235,12 @@ img.result2__image {
     }
 
     &::before {
-      @include center;
       content: "";
-      width: 100%;
-      height: 100%;
+      width: 4rem;
+      height: 4rem;
       background-color: $c-light;
       border: 2px solid $c-light;
       border-radius: 50%;
-      z-index: -1;
     }
   }
 
@@ -254,8 +259,8 @@ img.result2__image {
 
   &:hover {
     span::before {
-      width: 112.5%;
-      height: 112.5%;
+      width: 4.2rem;
+      height: 4.2rem;
     }
   }
 

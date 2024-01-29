@@ -184,10 +184,12 @@
 
   &--prev {
     @include rotateInLeft;
+    animation-delay: 0.1s;
   }
 
   &--next {
     @include rotateInRight;
+    animation-delay: 0.1s;
   }
 
   @media (min-width: $stop-scaling) {

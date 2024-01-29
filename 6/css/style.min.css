@@ -2984,8 +2984,8 @@ body.loaded .page-header__menu a.active::after {
   animation-delay: 0.4s;
   transform-origin: right bottom;
   transform: rotate(30deg) translate3d(-50%, 70%, 0);
-  width: 24%;
-  height: 34%;
+  width: 340px;
+  height: 330px;
 }
 .result2__image-wrap--leaf-right {
   animation-name: rotateLeafRight;
@@ -2995,8 +2995,8 @@ body.loaded .page-header__menu a.active::after {
   animation-delay: 0.4s;
   transform-origin: left bottom;
   transform: rotate(-30deg) translate3d(50%, 40%, 0);
-  width: 20%;
-  height: 27%;
+  width: 279px;
+  height: 261px;
 }
 .result2__image-wrap--leaf-green {
   animation-name: rotateLeafGreen;
@@ -3006,15 +3006,15 @@ body.loaded .page-header__menu a.active::after {
   animation-delay: 0.6s;
   transform-origin: left bottom;
   transform: rotate(-10deg) translate3d(46%, 115%, 0);
-  width: 24%;
-  height: 17%;
+  width: 332px;
+  height: 159px;
 }
 .result2__image-wrap--suitcase {
   animation-name: slideInUpRightSuitcase;
   animation-duration: 0.4s;
   animation-fill-mode: forwards;
-  width: 25%;
-  height: 35%;
+  width: 340px;
+  height: 330px;
 }
 .result2__image-wrap--flamingo {
   animation-name: slideUpDownFlamingo;
@@ -3026,8 +3026,8 @@ body.loaded .page-header__menu a.active::after {
   animation-direction: alternate;
   animation-timing-function: ease-out;
   transform-origin: 10% 100%;
-  width: 16%;
-  height: 26%;
+  width: 240px;
+  height: 270px;
 }
 
 img.result2__image--leaf-left {

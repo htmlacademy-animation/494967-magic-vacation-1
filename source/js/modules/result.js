@@ -9,6 +9,8 @@ export default () => {
           el.classList.remove(`screen--show`);
           el.classList.add(`screen--hidden`);
         });
+        document.getElementById('game').style['z-index'] = 1;
+        document.getElementById('constantScreen').style['z-index'] = 0;
         let targetEl = [].slice.call(results).filter(function (el) {
           return el.getAttribute(`id`) === target;
         });

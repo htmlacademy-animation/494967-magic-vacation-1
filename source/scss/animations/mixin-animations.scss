@@ -33,3 +33,17 @@
   opacity: 0;
   animation-fill-mode: forwards;
 }
+
+@mixin rotateInLeft {
+  animation-name: rotateInLeft;
+  animation-duration: 0.4s;
+  transform: translate3d(-50%, 0, 0) rotate(-90deg);
+  animation-fill-mode: forwards;
+}
+
+@mixin rotateInRight {
+  animation-name: rotateInRight;
+  animation-duration: 0.4s;
+  transform: translate3d(50%, 0, 0) rotate(90deg);
+  animation-fill-mode: forwards;
+}

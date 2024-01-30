@@ -38,7 +38,8 @@ export default class AccentTypography {
   prepareText() {
     if (!this.screenIsActive()) return;
 
-    if (this.isOneLine()) {
+    const isOne = this.isOneLine();
+    if (isOne) {
       const text = this.element.textContent;
 
       const content = Array.from(text).reduce((fragment, letter) => {

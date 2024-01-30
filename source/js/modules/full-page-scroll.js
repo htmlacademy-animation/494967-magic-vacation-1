@@ -1,5 +1,8 @@
 import throttle from 'lodash/throttle';
 import PageSwitchHandler from './page-switch-handler';
+import FooterNote from "./footer-note";
+import BackgroundInUp from "./background-in-up";
+import {getClassNameSlider} from './slider';
 
 export default class FullPageScroll {
   constructor() {
@@ -15,15 +18,6 @@ export default class FullPageScroll {
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
 
     this.pageSwitcher = new PageSwitchHandler();
-
-    this.constantScreenElement = document.getElementById('constantScreen');
-    this.withConstantScreen = [
-      'prizes',
-      'rules',
-      'game'
-    ];
-    this.durationConstScreenAnimation = 500;
-    this.delayConstScreenAnimation = 400;
   }
 
   init() {
@@ -35,8 +29,8 @@ export default class FullPageScroll {
 
   onScroll(evt) {
     if (this.scrollFlag) {
-      this.reCalculateActiveScreenPosition(evt.deltaY);
       const currentPosition = this.activeScreen;
+      this.reCalculateActiveScreenPosition(evt.deltaY);
       if (currentPosition !== this.activeScreen) {
         this.changePageDisplay();
       }
@@ -49,6 +43,7 @@ export default class FullPageScroll {
       this.timeout = null;
       this.scrollFlag = true;
     }, this.THROTTLE_TIMEOUT);
+    history.pushState(null, null, `/#${this.screenElements[this.activeScreen].id}`);
   }
 
   onUrlHashChanged() {
@@ -64,70 +59,40 @@ export default class FullPageScroll {
   }
 
   changeVisibilityDisplay() {
-    if (this.needSlideInUpConstScreen()) {
-      this.showConstantScreen();
-      setTimeout(() => {
-        this.changeDisplay();
-        this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
-      }, this.delayConstScreenAnimation);
-    } else if (this.needSlideOutDownConstScreen()) {
-      this.hideConstantScreen();
-      setTimeout(() => {
-        this.changeDisplay();
-        this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
-      }, this.delayConstScreenAnimation);
-    } else {
-      this.changeDisplay();
-      this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
+    this.changeSliderClass();
+    const backgroundInUp = new BackgroundInUp(this.activeScreen);
+    let needDelay = 0;
+    if (backgroundInUp.needSlideInUpConstScreen()) {
+      backgroundInUp.showConstantScreen();
+      needDelay = backgroundInUp.durationConstScreenAnimation;
+    } else if (backgroundInUp.needSlideOutDownConstScreen()) {
+      backgroundInUp.hideConstantScreen();
     }
-  }
-
-  //TODO Fix outDown Const screen
-  changeDisplay() {
-    this.screenElements.forEach((screen) => {
-      screen.classList.add(`screen--hidden`);
-      screen.classList.remove(`active`);
-    });
-    this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
     setTimeout(() => {
+      this.screenElements.forEach((screen) => {
+        screen.classList.add(`screen--hidden`);
+        screen.classList.remove(`active`);
+        if (backgroundInUp.withConstantScreen.indexOf(screen.id) !== -1) {
+          screen.style['z-index'] = 2;
+        }
+      });
+      this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
       this.screenElements[this.activeScreen].classList.add(`active`);
-    }, 100);
+      this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
+      const footerNote = new FooterNote(this.screenElements[this.activeScreen].id);
+      footerNote.run();
+    }, needDelay);
   }
 
-  needSlideInUpConstScreen() {
-    let isActiveConstScreen = this.constantScreenElement.classList.contains('active');
-    return this.needConstScreen() && !isActiveConstScreen;
-  }
-
-  needConstScreen() {
-    return this.withConstantScreen.indexOf(this.screenElements[this.activeScreen].id) !== -1;
-  }
-
-  needSlideOutDownConstScreen() {
-    let isActiveConstScreen = this.constantScreenElement.classList.contains('active');
-    return !this.needConstScreen() && isActiveConstScreen;
-  }
-
-  upLayoutConstScreen() {
-    this.constantScreenElement.style['z-index'] = 2;
-    let elem = document.getElementById(this.screenElements[this.activeScreen].id);
-    elem.style['z-index'] = 1;
-  }
-
-  downLayoutConstScreen() {
-    this.constantScreenElement.style['z-index'] = 0;
-  }
-
-  showConstantScreen() {
-    this.constantScreenElement.classList.add('active');
-    setTimeout(() => {
-      this.downLayoutConstScreen();
-    }, this.durationConstScreenAnimation)
-  }
-
-  hideConstantScreen() {
-    this.upLayoutConstScreen();
-    this.constantScreenElement.classList.remove('active');
+  changeSliderClass() {
+    if (this.screenElements[this.activeScreen].id === 'story') {
+      const index = [...document.querySelectorAll('.swiper-slide')].findIndex((elem) => {
+        return elem.classList.contains('swiper-slide-active');
+      });
+      document.body.classList.add(getClassNameSlider(index));
+    } else {
+      document.body.classList.remove('slide1', 'slide2', 'slide3', 'slide4');
+    }
   }
 
   changeActiveMenuItem() {

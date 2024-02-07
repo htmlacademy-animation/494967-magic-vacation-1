@@ -3,6 +3,7 @@ import PageSwitchHandler from './page-switch-handler';
 import FooterNote from "./footer-note";
 import BackgroundInUp from "./background-in-up";
 import {getClassNameSlider} from './slider';
+import LoadingImages from "./loading-images";
 
 export default class FullPageScroll {
   constructor() {
@@ -78,10 +79,14 @@ export default class FullPageScroll {
       });
       this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
       this.screenElements[this.activeScreen].classList.add(`active`);
-      this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
-      const footerNote = new FooterNote(this.screenElements[this.activeScreen].id);
-      footerNote.run();
+      this.afterChangeScreen();
     }, needDelay);
+  }
+
+  afterChangeScreen() {
+    this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
+    const footerNote = new FooterNote(this.screenElements[this.activeScreen].id);
+    footerNote.run();
   }
 
   changeSliderClass() {

@@ -166,7 +166,7 @@
   &--cases {
     margin-left: 7rem;
     opacity: 0;
-    transition: opacity 0.4s ease 0.3s;
+    transition: opacity 0.4s ease;
 
     &.active {
       opacity: 1;
@@ -213,7 +213,7 @@
 
   &--codes {
     opacity: 0;
-    transition: opacity 0.4s ease 0.2s;
+    transition: opacity 0.4s ease;
 
     &.active {
       opacity: 1;

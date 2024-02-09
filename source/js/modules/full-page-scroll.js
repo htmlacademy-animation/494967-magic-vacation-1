@@ -4,6 +4,7 @@ import FooterNote from "./footer-note";
 import BackgroundInUp from "./background-in-up";
 import {getClassNameSlider} from './slider';
 import LoadingImages from "./loading-images";
+import GameTimer from "./game";
 
 export default class FullPageScroll {
   constructor() {
@@ -87,6 +88,13 @@ export default class FullPageScroll {
     this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
     const footerNote = new FooterNote(this.screenElements[this.activeScreen].id);
     footerNote.run();
+
+    const gameTimer = new GameTimer();
+    if (this.screenElements[this.activeScreen].id === 'game') {
+      gameTimer.run();
+    } else {
+      gameTimer.stopTimer()
+    }
   }
 
   changeSliderClass() {

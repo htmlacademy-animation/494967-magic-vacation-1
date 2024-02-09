@@ -10713,6 +10713,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _background_in_up__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./background-in-up */ "./source/js/modules/background-in-up.js");
 /* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./slider */ "./source/js/modules/slider.js");
 /* harmony import */ var _loading_images__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./loading-images */ "./source/js/modules/loading-images.js");
+/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./game */ "./source/js/modules/game.js");
+
 
 
 
@@ -10802,6 +10804,13 @@ class FullPageScroll {
     this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
     const footerNote = new _footer_note__WEBPACK_IMPORTED_MODULE_2__["default"](this.screenElements[this.activeScreen].id);
     footerNote.run();
+
+    const gameTimer = new _game__WEBPACK_IMPORTED_MODULE_6__["default"]();
+    if (this.screenElements[this.activeScreen].id === 'game') {
+      gameTimer.run();
+    } else {
+      gameTimer.stopTimer()
+    }
   }
 
   changeSliderClass() {
@@ -10856,30 +10865,45 @@ class FullPageScroll {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (() => {
-  let timeSelector = document.getElementById('gameTimer'),
-    countdown = new Date(),
-    maxTime = new Date(Date.now() + (1000 * 60 * 5)),
-    requestId;
-
-  function step() {
-    countdown.setTime(maxTime - Date.now());
-    let minutesString = countdown.getUTCMinutes().toString().length === 2
-      ? countdown.getUTCMinutes().toString()
-      : '0' + countdown.getUTCMinutes().toString();
-    let secondsString = countdown.getUTCSeconds().toString().length === 2
-      ? countdown.getUTCSeconds().toString()
-      : '0' + countdown.getUTCSeconds().toString();
-
-    timeSelector.innerHTML = minutesString + ':' + secondsString;
-    if (countdown.getUTCHours() > 0 || countdown.getUTCMinutes() > 0 || countdown.getUTCSeconds() > 0) {
-      requestId = requestAnimationFrame(step);
-    }
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameTimer; });
+class GameTimer {
+  constructor() {
+    this.timeSelector = document.getElementById('gameTimer');
+    this.countdown = new Date();
+    this.maxTime = new Date(Date.now() + (1000 * 60 * 5));
   }
 
-  requestAnimationFrame(step);
-  cancelAnimationFrame(requestId);
-});
+  run() {
+    console.log('run');
+    let step = (target) => {
+      this.countdown.setTime(this.maxTime - Date.now());
+      let minutesString = this.countdown.getUTCMinutes().toString().length === 2
+        ? this.countdown.getUTCMinutes().toString()
+        : '0' + this.countdown.getUTCMinutes().toString();
+      let secondsString = this.countdown.getUTCSeconds().toString().length === 2
+        ? this.countdown.getUTCSeconds().toString()
+        : '0' + this.countdown.getUTCSeconds().toString();
+
+      this.timeSelector.innerHTML = minutesString + ':' + secondsString;
+      if (this.countdown.getUTCMinutes() > 0 || this.countdown.getUTCSeconds() > 0) {
+        let requestId = requestAnimationFrame(() => step(target));
+        this.saveRequestId(requestId);
+      }
+    }
+    requestAnimationFrame(() => step(this));
+    this.stopTimer();
+  }
+
+  stopTimer() {
+    if (sessionStorage['gameTimerRequestId'] === 'null') return;
+    cancelAnimationFrame(sessionStorage['gameTimerRequestId']);
+    sessionStorage['gameTimerRequestId'] = null;
+  }
+
+  saveRequestId(requestId) {
+    sessionStorage['gameTimerRequestId'] = requestId;
+  }
+};
 
 
 /***/ }),
@@ -11275,10 +11299,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_form_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/form.js */ "./source/js/modules/form.js");
 /* harmony import */ var _modules_social_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/social.js */ "./source/js/modules/social.js");
 /* harmony import */ var _modules_prizes_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/prizes.js */ "./source/js/modules/prizes.js");
-/* harmony import */ var _modules_game_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/game.js */ "./source/js/modules/game.js");
-/* harmony import */ var _modules_full_page_scroll__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/full-page-scroll */ "./source/js/modules/full-page-scroll.js");
+/* harmony import */ var _modules_full_page_scroll__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/full-page-scroll */ "./source/js/modules/full-page-scroll.js");
 // modules
-
 
 
 
@@ -11302,9 +11324,8 @@ Object(_modules_result_js__WEBPACK_IMPORTED_MODULE_6__["default"])();
 Object(_modules_form_js__WEBPACK_IMPORTED_MODULE_7__["default"])();
 Object(_modules_social_js__WEBPACK_IMPORTED_MODULE_8__["default"])();
 Object(_modules_prizes_js__WEBPACK_IMPORTED_MODULE_9__["default"])();
-Object(_modules_game_js__WEBPACK_IMPORTED_MODULE_10__["default"])();
 
-const fullPageScroll = new _modules_full_page_scroll__WEBPACK_IMPORTED_MODULE_11__["default"]();
+const fullPageScroll = new _modules_full_page_scroll__WEBPACK_IMPORTED_MODULE_10__["default"]();
 fullPageScroll.init();
 
 

@@ -85,21 +85,25 @@
 
   @media (min-width: $tablet) {
     margin-right: 5.6rem;
+    width: 8%;
   }
 
   @media (max-width: $tablet) and (orientation: portrait) {
     margin-bottom: 1.8rem;
     font-size: 3.6rem;
+    width: 28%;
   }
 
   @media (max-width: $tablet) and (orientation: landscape) {
     font-size: 3rem;
     margin-bottom: 2rem;
+    width: 8%;
   }
 
   @media (max-width: $mobile) and (orientation: landscape) {
     font-size: 2rem;
     margin-bottom: 1rem;
+    width: 8%;
   }
 }
 

@@ -2027,24 +2027,28 @@ img {
 @media (min-width: 1024px) {
   .game__counter {
     margin-right: 5.6rem;
+    width: 8%;
   }
 }
 @media (max-width: 1024px) and (orientation: portrait) {
   .game__counter {
     margin-bottom: 1.8rem;
     font-size: 3.6rem;
+    width: 28%;
   }
 }
 @media (max-width: 1024px) and (orientation: landscape) {
   .game__counter {
     font-size: 3rem;
     margin-bottom: 2rem;
+    width: 8%;
   }
 }
 @media (max-width: 768px) and (orientation: landscape) {
   .game__counter {
     font-size: 2rem;
     margin-bottom: 1rem;
+    width: 8%;
   }
 }
 

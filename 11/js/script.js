@@ -10791,7 +10791,7 @@ class FullPageScroll {
         screen.classList.add(`screen--hidden`);
         screen.classList.remove(`active`);
         if (backgroundInUp.withConstantScreen.indexOf(screen.id) !== -1) {
-          screen.style['z-index'] = 2;
+          screen.style[`z-index`] = 2;
         }
       });
       this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
@@ -10806,21 +10806,21 @@ class FullPageScroll {
     footerNote.run();
 
     const gameTimer = new _game__WEBPACK_IMPORTED_MODULE_6__["default"]();
-    if (this.screenElements[this.activeScreen].id === 'game') {
+    if (this.screenElements[this.activeScreen].id === `game`) {
       gameTimer.run();
     } else {
-      gameTimer.stopTimer()
+      gameTimer.stopTimer();
     }
   }
 
   changeSliderClass() {
-    if (this.screenElements[this.activeScreen].id === 'story') {
-      const index = [...document.querySelectorAll('.swiper-slide')].findIndex((elem) => {
-        return elem.classList.contains('swiper-slide-active');
+    if (this.screenElements[this.activeScreen].id === `story`) {
+      const index = [...document.querySelectorAll(`.swiper-slide`)].findIndex((elem) => {
+        return elem.classList.contains(`swiper-slide-active`);
       });
       document.body.classList.add(Object(_slider__WEBPACK_IMPORTED_MODULE_4__["getClassNameSlider"])(index));
     } else {
-      document.body.classList.remove('slide1', 'slide2', 'slide3', 'slide4');
+      document.body.classList.remove(`slide1`, `slide2`, `slide3`, `slide4`);
     }
   }
 
@@ -10868,42 +10868,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GameTimer; });
 class GameTimer {
   constructor() {
-    this.timeSelector = document.getElementById('gameTimer');
+    this.timeSelector = document.getElementById(`gameTimer`);
     this.countdown = new Date();
     this.maxTime = new Date(Date.now() + (1000 * 60 * 5));
+    this.pastTime = ``;
+    this.currentTime = ``;
   }
 
   run() {
-    console.log('run');
+    this.calculateTime();
     let step = (target) => {
-      this.countdown.setTime(this.maxTime - Date.now());
-      let minutesString = this.countdown.getUTCMinutes().toString().length === 2
-        ? this.countdown.getUTCMinutes().toString()
-        : '0' + this.countdown.getUTCMinutes().toString();
-      let secondsString = this.countdown.getUTCSeconds().toString().length === 2
-        ? this.countdown.getUTCSeconds().toString()
-        : '0' + this.countdown.getUTCSeconds().toString();
+      this.calculateTime();
 
-      this.timeSelector.innerHTML = minutesString + ':' + secondsString;
-      if (this.countdown.getUTCMinutes() > 0 || this.countdown.getUTCSeconds() > 0) {
-        let requestId = requestAnimationFrame(() => step(target));
+      if (this.currentTime !== this.pastTime) {
+        this.draw();
+      }
+      if (!this.isFinished()) {
+        let requestId = requestAnimationFrame(step.bind(this, target));
         this.saveRequestId(requestId);
       }
-    }
-    requestAnimationFrame(() => step(this));
+    };
+    requestAnimationFrame(step.bind(this));
     this.stopTimer();
   }
 
+  isFinished() {
+    return this.countdown.getUTCMinutes() === 0 && this.countdown.getUTCSeconds() === 0;
+  }
+
+  calculateTime() {
+    this.countdown.setTime(this.maxTime - Date.now());
+    let minutesString = this.countdown.getUTCMinutes().toString().length === 2
+      ? this.countdown.getUTCMinutes().toString()
+      : `0` + this.countdown.getUTCMinutes().toString();
+    let secondsString = this.countdown.getUTCSeconds().toString().length === 2
+      ? this.countdown.getUTCSeconds().toString()
+      : `0` + this.countdown.getUTCSeconds().toString();
+    this.currentTime = minutesString + `:` + secondsString;
+  }
+
+  draw() {
+    this.timeSelector.innerHTML = this.currentTime;
+    this.pastTime = this.currentTime;
+  }
+
   stopTimer() {
-    if (sessionStorage['gameTimerRequestId'] === 'null') return;
-    cancelAnimationFrame(sessionStorage['gameTimerRequestId']);
-    sessionStorage['gameTimerRequestId'] = null;
+    if (sessionStorage[`gameTimerRequestId`] === `null`) {
+      return;
+    }
+    cancelAnimationFrame(sessionStorage[`gameTimerRequestId`]);
+    sessionStorage[`gameTimerRequestId`] = null;
   }
 
   saveRequestId(requestId) {
-    sessionStorage['gameTimerRequestId'] = requestId;
+    sessionStorage[`gameTimerRequestId`] = requestId;
   }
-};
+}
 
 
 /***/ }),
@@ -10921,19 +10941,19 @@ __webpack_require__.r(__webpack_exports__);
 class LoadingImages {
   constructor() {
     this.sourcesImages = {
-      'prizes': ['img/prize1.svg', 'img/prize2.svg', 'img/prize3.svg']
+      'prizes': [`img/prize1.svg`, `img/prize2.svg`, `img/prize3.svg`]
     };
   }
 
   preload() {
     for (let screen in this.sourcesImages) {
       this.sourcesImages[screen].forEach((source) => {
-        let imgElement = document.createElement("img");
+        let imgElement = document.createElement(`img`);
         imgElement.src = source;
-      })
+      });
     }
   }
-};
+}
 
 
 /***/ }),

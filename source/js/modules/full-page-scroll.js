@@ -4,6 +4,7 @@ import FooterNote from "./footer-note";
 import BackgroundInUp from "./background-in-up";
 import {getClassNameSlider} from './slider';
 import LoadingImages from "./loading-images";
+import GameTimer from "./game";
 
 export default class FullPageScroll {
   constructor() {
@@ -74,7 +75,7 @@ export default class FullPageScroll {
         screen.classList.add(`screen--hidden`);
         screen.classList.remove(`active`);
         if (backgroundInUp.withConstantScreen.indexOf(screen.id) !== -1) {
-          screen.style['z-index'] = 2;
+          screen.style[`z-index`] = 2;
         }
       });
       this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
@@ -87,16 +88,23 @@ export default class FullPageScroll {
     this.pageSwitcher.runAnimations(this.screenElements[this.activeScreen].id);
     const footerNote = new FooterNote(this.screenElements[this.activeScreen].id);
     footerNote.run();
+
+    const gameTimer = new GameTimer();
+    if (this.screenElements[this.activeScreen].id === `game`) {
+      gameTimer.run();
+    } else {
+      gameTimer.stopTimer();
+    }
   }
 
   changeSliderClass() {
-    if (this.screenElements[this.activeScreen].id === 'story') {
-      const index = [...document.querySelectorAll('.swiper-slide')].findIndex((elem) => {
-        return elem.classList.contains('swiper-slide-active');
+    if (this.screenElements[this.activeScreen].id === `story`) {
+      const index = [...document.querySelectorAll(`.swiper-slide`)].findIndex((elem) => {
+        return elem.classList.contains(`swiper-slide-active`);
       });
       document.body.classList.add(getClassNameSlider(index));
     } else {
-      document.body.classList.remove('slide1', 'slide2', 'slide3', 'slide4');
+      document.body.classList.remove(`slide1`, `slide2`, `slide3`, `slide4`);
     }
   }
 

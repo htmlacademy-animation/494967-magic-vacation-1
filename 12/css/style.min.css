@@ -2926,10 +2926,12 @@ body.loaded .page-header__menu a.active::after {
   justify-content: flex-start;
 }
 .prizes__desc--cases b {
-  width: 25%;
+  width: 10%;
 }
 .prizes__desc--cases span {
-  width: 70%;
+  width: 55%;
+  margin-left: 30% !important;
+  margin-right: -130px;
 }
 .prizes__desc--codes {
   justify-content: flex-start;

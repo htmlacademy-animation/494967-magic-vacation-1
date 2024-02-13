@@ -279,6 +279,15 @@
 
   &--cases {
     margin-left: 10rem;
+    justify-content: flex-start;
+
+    & b {
+      width: 25%;
+    }
+
+    & span {
+      width: 70%;
+    }
   }
 
   &--codes {

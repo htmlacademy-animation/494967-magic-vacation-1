@@ -2923,6 +2923,13 @@ body.loaded .page-header__menu a.active::after {
 }
 .prizes__desc--cases {
   margin-left: 10rem;
+  justify-content: flex-start;
+}
+.prizes__desc--cases b {
+  width: 25%;
+}
+.prizes__desc--cases span {
+  width: 70%;
 }
 .prizes__desc--codes {
   justify-content: flex-start;

@@ -94,6 +94,7 @@
   justify-content: flex-end;
   align-items: flex-end;
   margin-top: auto;
+  margin-right: 10rem;
 
   @media (max-width: $tablet) and (orientation: portrait) {
     flex-direction: column;
@@ -164,7 +165,7 @@
   }
 
   &--cases {
-    margin-left: 7rem;
+    margin-left: -7rem;
     opacity: 0;
     transition: opacity 0.4s ease;
 
@@ -276,6 +277,24 @@
   font-size: 1.8rem;
   line-height: 1.1;
 
+  &--cases {
+    margin-left: 10rem;
+  }
+
+  &--codes {
+    justify-content: flex-start;
+
+    & b {
+      width: 50%;
+    }
+
+    & span {
+      width: 55%;
+      margin-left: 30% !important;
+      margin-right: -130px;
+    }
+  }
+
   @media (min-width: $stop-scaling) {
     margin-top: 56px;
     font-size: 18px;
@@ -305,6 +324,7 @@
     font-weight: 400;
     font-size: 12rem;
     line-height: 0.55;
+    opacity: 0;
 
     @media (min-width: $stop-scaling) {
       font-size: 120px;
@@ -329,6 +349,7 @@
     align-items: flex-end;
     margin-left: 1.4rem;
     max-width: 14rem;
+    opacity: 0;
 
     @media (min-width: $stop-scaling) {
       margin-left: 14px;

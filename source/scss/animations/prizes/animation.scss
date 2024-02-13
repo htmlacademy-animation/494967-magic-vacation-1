@@ -1,0 +1,11 @@
+.prizes__item .prizes__desc.active {
+  & b {
+    @include fadeIn;
+    animation-duration: 1s;
+  }
+
+  & span {
+    @include fadeInRight;
+    animation-duration: 1s;
+  }
+}

@@ -65,10 +65,7 @@
 }
 
 .rules__item-text {
-  opacity: 0;
-  transform: translateX(20%);
-  animation-name: fadeInRight;
-  animation-fill-mode: forwards;
+  @include fadeInRight;
 }
 
 .rules__link {

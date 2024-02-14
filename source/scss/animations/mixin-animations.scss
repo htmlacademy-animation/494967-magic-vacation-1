@@ -20,6 +20,14 @@
   animation-fill-mode: forwards;
 }
 
+@mixin fadeInRight {
+  animation-name: fadeInRight;
+  transform: translateX(20%);
+  animation-duration: 0.4s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
 @mixin fadeOut {
   animation-name: fadeOut;
   animation-duration: 0.4s;

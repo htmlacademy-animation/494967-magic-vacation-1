@@ -233,10 +233,10 @@ export default class SeaCalfCanvasAnimation extends Scene2D {
         const progressReversed = 1 - progress;
 
         this.objects.seaCalf.transforms.translateY = 30 * progressReversed;
-        this.objects.seaCalf.transforms.rotate = -30 * Math.sin(progressReversed * 2);
+        this.objects.seaCalf.transforms.rotate = -20 * Math.sin(progressReversed * 2);
 
         this.objects.ice.transforms.translateY = 30 * progressReversed;
-        this.objects.ice.transforms.rotate = -30 * Math.sin(progressReversed * 2);
+        this.objects.ice.transforms.rotate = -20 * Math.sin(progressReversed * 2);
       },
       duration: 2000,
       delay: 300,

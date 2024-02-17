@@ -317,6 +317,20 @@ img.result2__image {
   }
 }
 
+.result--trip {
+  position: relative;
+
+  & .result__image {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    z-index: -1;
+  }
+}
+
 .result--negative {
   .result__title {
     margin-top: 9.5rem;

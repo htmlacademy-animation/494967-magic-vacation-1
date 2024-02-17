@@ -3,8 +3,7 @@ import PageSwitchHandler from './page-switch-handler';
 import FooterNote from "./footer-note";
 import BackgroundInUp from "./background-in-up";
 import {getClassNameSlider} from './slider';
-import LoadingImages from "./loading-images";
-import GameTimer from "./game";
+import GameTimer from "./game-timer";
 
 export default class FullPageScroll {
   constructor() {

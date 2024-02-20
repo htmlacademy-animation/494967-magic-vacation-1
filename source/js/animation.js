@@ -1,4 +1,4 @@
-import _ from './utils.js';
+import _ from './easing.js';
 
 
 export default class Animation {

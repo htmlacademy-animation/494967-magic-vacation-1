@@ -1,10 +1,7 @@
-import SeaCalfWinResult from "../canvas/sea-calf-canvas-animation";
+import SeaCalfCanvasAnimation from "../canvas/sea-calf-canvas-animation";
+import CrocodileCanvasAnimation from "../canvas/crocodile-canvas-animation";
 
 export default () => {
-  /* const resultWinCanvas = new SeaCalfWinResult();
-  const scriptRunResult = {
-    result: resultWinCanvas
-  };*/
   let showResultEls = document.querySelectorAll(`.js-show-result`);
   let results = document.querySelectorAll(`.screen--result`);
   if (results.length) {
@@ -40,8 +37,13 @@ export default () => {
   }
 
   function resultScreenHandler(target) {
-    if (target === `result`) {
-      const resultWinCanvas = new SeaCalfWinResult();
+    switch (target) {
+      case `result`:
+        new SeaCalfCanvasAnimation();
+        break;
+      case `result3`:
+        new CrocodileCanvasAnimation();
+        break;
     }
   }
 };

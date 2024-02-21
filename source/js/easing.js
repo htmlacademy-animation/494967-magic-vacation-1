@@ -13,6 +13,21 @@ function easeOutCubic(x) {
 }
 
 
+function easeInQuint(x) {
+  return x * x * x * x * x;
+}
+
+
+function easeOutQuint(x) {
+  return 1 - Math.pow(1 - x, 5);
+}
+
+
+function easeInOutSine(x) {
+  return -(Math.cos(Math.PI * x) - 1) / 2;
+}
+
+
 function easeInExpo(x) {
   if (x === 0) {
     return 0;
@@ -61,6 +76,9 @@ const _ = Object.freeze({
   easeLinear,
   easeInCubic,
   easeOutCubic,
+  easeInQuint,
+  easeOutQuint,
+  easeInOutSine,
   easeInExpo,
   easeOutExpo,
   easeInElastic,

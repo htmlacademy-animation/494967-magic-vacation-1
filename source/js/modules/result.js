@@ -1,5 +1,5 @@
-import SeaCalfCanvasAnimation from "../canvas/sea-calf-canvas-animation";
-import CrocodileCanvasAnimation from "../canvas/crocodile-canvas-animation";
+import SeaCalfCanvasAnimation from "../2d/sea-calf-canvas-animation";
+import CrocodileCanvasAnimation from "../2d/crocodile-canvas-animation";
 
 export default () => {
   let showResultEls = document.querySelectorAll(`.js-show-result`);

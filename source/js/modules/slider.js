@@ -1,9 +1,18 @@
 import Swiper from "swiper";
 
-export default () => {
+export const SLIDER_PLANES = {
+  0: `story1`,
+  1: `story1`,
+  2: `story2`,
+  3: `story2`,
+  4: `story3`,
+  5: `story3`,
+  6: `story4`,
+  7: `story4`,
+};
+
+export default (planeView) => {
   let storySlider;
-  let sliderContainer = document.getElementById(`story`);
-  sliderContainer.style.backgroundImage = `url("img/slide1.jpg"), linear-gradient(180deg, rgba(83, 65, 118, 0) 0%, #523E75 16.85%)`;
 
   const setSlider = function () {
     if (((window.innerWidth / window.innerHeight) < 1) || window.innerWidth < 769) {
@@ -17,16 +26,7 @@ export default () => {
         },
         on: {
           slideChange: () => {
-            setBodyStoryClass();
-            if (storySlider.activeIndex === 0 || storySlider.activeIndex === 1) {
-              sliderContainer.style.backgroundImage = `url("img/slide1.jpg"), linear-gradient(180deg, rgba(83, 65, 118, 0) 0%, #523E75 16.85%)`;
-            } else if (storySlider.activeIndex === 2 || storySlider.activeIndex === 3) {
-              sliderContainer.style.backgroundImage = `url("img/slide2.jpg"), linear-gradient(180deg, rgba(45, 54, 179, 0) 0%, #2A34B0 16.85%)`;
-            } else if (storySlider.activeIndex === 4 || storySlider.activeIndex === 5) {
-              sliderContainer.style.backgroundImage = `url("img/slide3.jpg"), linear-gradient(180deg, rgba(92, 138, 198, 0) 0%, #5183C4 16.85%)`;
-            } else if (storySlider.activeIndex === 6 || storySlider.activeIndex === 7) {
-              sliderContainer.style.backgroundImage = `url("img/slide4.jpg"), linear-gradient(180deg, rgba(45, 39, 63, 0) 0%, #2F2A42 16.85%)`;
-            }
+            planeView.setPlane(SLIDER_PLANES[storySlider.activeIndex]);
           },
           resize: () => {
             storySlider.update();
@@ -52,16 +52,7 @@ export default () => {
         },
         on: {
           slideChange: () => {
-            setBodyStoryClass();
-            if (storySlider.activeIndex === 0) {
-              sliderContainer.style.backgroundImage = `url("img/slide1.jpg")`;
-            } else if (storySlider.activeIndex === 2) {
-              sliderContainer.style.backgroundImage = `url("img/slide2.jpg")`;
-            } else if (storySlider.activeIndex === 4) {
-              sliderContainer.style.backgroundImage = `url("img/slide3.jpg")`;
-            } else if (storySlider.activeIndex === 6) {
-              sliderContainer.style.backgroundImage = `url("img/slide4.jpg")`;
-            }
+            planeView.setPlane(SLIDER_PLANES[storySlider.activeIndex]);
           },
           resize: () => {
             storySlider.update();
@@ -75,7 +66,7 @@ export default () => {
     function setBodyStoryClass() {
       let className = getClassNameSlider(storySlider.activeIndex);
 
-      document.body.classList.remove('slide1', 'slide2', 'slide3', 'slide4');
+      document.body.classList.remove(`slide1`, `slide2`, `slide3`, `slide4`);
       document.body.classList.add(className);
     }
 
@@ -96,17 +87,17 @@ export function getClassNameSlider(index) {
   switch (index) {
     case 0:
     case 1:
-      return 'slide1';
+      return `slide1`;
     case 2:
     case 3:
-      return 'slide2';
+      return `slide2`;
     case 4:
     case 5:
-      return 'slide3';
+      return `slide3`;
     case 6:
     case 7:
-      return 'slide4';
+      return `slide4`;
     default:
-      return 'slide1';
+      return `slide1`;
   }
 }

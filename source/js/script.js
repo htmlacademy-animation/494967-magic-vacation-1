@@ -10,11 +10,16 @@ import form from './modules/form.js';
 import social from './modules/social.js';
 import prizes from './modules/prizes.js';
 import FullPageScroll from './modules/full-page-scroll';
+import ThreeBackground from './3d/3d.js';
+import PlaneView from "./3d/plane-view";
+
+const planeView = new PlaneView();
+planeView.init();
 
 // init modules
 common();
 mobileHeight();
-slider();
+slider(planeView);
 menu();
 footer();
 chat();
@@ -25,3 +30,6 @@ prizes();
 
 const fullPageScroll = new FullPageScroll();
 fullPageScroll.init();
+
+const view3d = new ThreeBackground(planeView);
+view3d.start();

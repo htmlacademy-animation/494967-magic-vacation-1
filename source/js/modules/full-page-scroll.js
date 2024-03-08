@@ -124,7 +124,7 @@ export default class FullPageScroll {
       }
     });
 
-    document.body.dispatchEvent(event);
+    document.dispatchEvent(event);
   }
 
   reCalculateActiveScreenPosition(delta) {

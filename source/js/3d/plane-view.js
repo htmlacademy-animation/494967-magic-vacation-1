@@ -1,6 +1,7 @@
 
 import * as THREE from 'three';
 import Setup3D from './utils/setup3d.js';
+import CustomMaterial from "./custom-material";
 
 const PLANES = [
   {
@@ -49,9 +50,7 @@ export default class PlaneView extends Setup3D {
 
   createPlaneObject(texture, width, height, position) {
     const geometry = new THREE.PlaneBufferGeometry(width, height);
-    const material = new THREE.MeshBasicMaterial({
-      map: texture
-    });
+    const material = new CustomMaterial(texture);
     const plane = new THREE.Mesh(geometry, material);
     plane.position.x = position;
 

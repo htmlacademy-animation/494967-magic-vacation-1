@@ -15,6 +15,7 @@ const PLANES = [
   {
     name: `story2`,
     url: `img/scenes-textures/scene-2.png`,
+    filter: -0.2
   },
   {
     name: `story3`,
@@ -36,6 +37,7 @@ export default class PlaneView extends Setup3D {
       near: 1,
 
     });
+    this.screenPlaneName = ``;
     this.planeWidth = 2048;
     this.planeHeight = 1024;
     this.planePositions = {};
@@ -48,9 +50,17 @@ export default class PlaneView extends Setup3D {
     this.setupPlaneObjects();
   }
 
-  createPlaneObject(texture, width, height, position) {
+  createPlaneObject(texture, options) {
+    const {width, height, position, filter} = options;
     const geometry = new THREE.PlaneBufferGeometry(width, height);
-    const material = new CustomMaterial(texture);
+    let material;
+    if (filter) {
+      material = new CustomMaterial(texture, filter);
+    } else {
+      material = new THREE.MeshBasicMaterial({
+        map: texture
+      });
+    }
     const plane = new THREE.Mesh(geometry, material);
     plane.position.x = position;
 
@@ -60,13 +70,15 @@ export default class PlaneView extends Setup3D {
 
   setupPlaneObjects() {
     PLANES.forEach((item, i) => {
-      this.loadTexture({
-        url: item.url,
-        width: this.planeWidth,
-        height: this.planeHeight,
-        position: this.planeWidth * i,
-      },
-      this.createPlaneObject);
+      this.loadTexture(
+          item.url,
+          this.createPlaneObject,
+          {
+            width: this.planeWidth,
+            height: this.planeHeight,
+            position: this.planeWidth * i,
+            filter: item.filter
+          });
       this.planePositions[item.name] = this.planeWidth * i;
     });
   }

@@ -1,5 +1,3 @@
-`use strict`;
-
 import * as THREE from "three";
 
 export default class Setup3D {
@@ -44,14 +42,13 @@ export default class Setup3D {
     this.camera.position.z = this.far;
   }
 
-  loadTexture(data, callback) {
-    const {url, width, height, position} = data;
+  loadTexture(url, callback, options) {
     const manager = new THREE.LoadingManager();
     const loader = new THREE.TextureLoader(manager);
     const texture = loader.load(url);
 
     manager.onLoad = () => {
-      callback(texture, width, height, position);
+      callback(texture, options);
     };
   }
 

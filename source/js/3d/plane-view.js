@@ -1,4 +1,3 @@
-
 import * as THREE from 'three';
 import Setup3D from './utils/setup3d.js';
 import CustomMaterial from "./custom-material";
@@ -55,7 +54,11 @@ export default class PlaneView extends Setup3D {
     const geometry = new THREE.PlaneBufferGeometry(width, height);
     let material;
     if (filter) {
-      material = new CustomMaterial(texture, filter);
+      const shaderOptions = {
+        filter,
+        uCanvasSize: [window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio]
+      };
+      material = new CustomMaterial(texture, shaderOptions);
     } else {
       material = new THREE.MeshBasicMaterial({
         map: texture

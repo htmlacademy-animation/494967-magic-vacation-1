@@ -14,7 +14,7 @@ const PLANES = [
   {
     name: `story2`,
     url: `img/scenes-textures/scene-2.png`,
-    filter: -0.2
+    uFilter: -0.2
   },
   {
     name: `story3`,
@@ -50,12 +50,12 @@ export default class PlaneView extends Setup3D {
   }
 
   createPlaneObject(texture, options) {
-    const {width, height, position, filter} = options;
+    const {width, height, position, uFilter} = options;
     const geometry = new THREE.PlaneBufferGeometry(width, height);
     let material;
-    if (filter) {
+    if (uFilter) {
       const shaderOptions = {
-        filter,
+        uFilter,
         uCanvasSize: [window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio]
       };
       material = new CustomMaterial(texture, shaderOptions);
@@ -80,7 +80,7 @@ export default class PlaneView extends Setup3D {
             width: this.planeWidth,
             height: this.planeHeight,
             position: this.planeWidth * i,
-            filter: item.filter
+            uFilter: item.uFilter
           });
       this.planePositions[item.name] = this.planeWidth * i;
     });

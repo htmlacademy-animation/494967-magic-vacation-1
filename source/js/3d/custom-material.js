@@ -10,7 +10,7 @@ export default class CustomMaterial extends RawShaderMaterial {
         map: {
           value: texture
         },
-        filter: {
+        uFilter: {
           value: uFilter
         },
         bubbles: {
@@ -34,7 +34,8 @@ export default class CustomMaterial extends RawShaderMaterial {
         }
       },
       defines: {
-        BUBBLE_OFFSET: 0.3
+        BUBBLE_OFFSET: 0.3,
+        BUBBLE_BORDER_WIDTH: 1.9,
       },
       vertexShader,
       fragmentShader

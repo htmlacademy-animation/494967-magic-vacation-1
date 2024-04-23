@@ -4,14 +4,20 @@ import {RawShaderMaterial} from "three/src/materials/RawShaderMaterial";
 
 export default class CustomMaterial extends RawShaderMaterial {
   constructor(texture, shaderOptions) {
-    const {uFilter, /* bubblesPositions, bubbleRadius, */uCanvasSize} = shaderOptions;
+    const {uHue, uTimeHue, uEasingHue, uCanvasSize} = shaderOptions;
     super({
       uniforms: {
         map: {
           value: texture
         },
-        uFilter: {
-          value: uFilter
+        uHue: {
+          value: uHue
+        },
+        uTimeHue: {
+          value: uTimeHue
+        },
+        uEasingHue: {
+          value: uEasingHue
         },
         bubbles: {
           value: [
@@ -37,6 +43,7 @@ export default class CustomMaterial extends RawShaderMaterial {
         BUBBLE_OFFSET: 0.3,
         BUBBLE_BORDER_WIDTH: 1.9,
       },
+      transparent: true,
       vertexShader,
       fragmentShader
     });

@@ -1,6 +1,6 @@
 precision mediump float;
 uniform sampler2D map;
-uniform float uFilter;
+uniform float uHue;
 struct Bubble {
   vec2 position;
   float size;
@@ -10,7 +10,7 @@ uniform vec2 uCanvasSize;
 varying vec2 vUv;
 
 vec3 hueShift(vec3 color) {
-  float hue = uFilter;
+  float hue = uHue;
   const vec3 k = vec3(0.57735, 0.57735, 0.57735);
   float cosAngle = cos(hue);
   return vec3(color * cosAngle + cross(k, color) * sin(hue) + k * dot(k, color) * (1.0 - cosAngle));
@@ -50,8 +50,7 @@ void drawInBubble(inout vec4 texel, Bubble bubble) {
               && textureCoord.y > yPositionOffsetGlareFromCenter;
 
   if (isBorder || isGlare) {
-    //texel = vec4(1.0, 1.0, 1.0, 0.15);
-    texel = vec4(texel.rgb * 1.1, 0.15);
+    texel = vec4(mix(texel.rgb, vec3(1.0), 0.15), 1.0);
   }
 }
 

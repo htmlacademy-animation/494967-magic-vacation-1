@@ -53,6 +53,7 @@ export default (planeView) => {
         on: {
           slideChange: () => {
             planeView.setPlane(SLIDER_PLANES[storySlider.activeIndex]);
+            planeView.setEffect(SLIDER_PLANES[storySlider.activeIndex]);
           },
           resize: () => {
             storySlider.update();

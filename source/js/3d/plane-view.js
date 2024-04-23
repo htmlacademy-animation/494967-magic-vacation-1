@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import Setup3D from './utils/setup3d.js';
+import _ from '../easing.js';
+import Animation from '../animation';
 import CustomMaterial from "./custom-material";
 
 const PLANES = [
@@ -14,7 +16,11 @@ const PLANES = [
   {
     name: `story2`,
     url: `img/scenes-textures/scene-2.png`,
-    uFilter: -0.2
+    params: {
+      uHue: 0.2,
+      uTimeHue: 2000,
+      uEasingHue: _.easeOutSine
+    }
   },
   {
     name: `story3`,
@@ -47,15 +53,64 @@ export default class PlaneView extends Setup3D {
   init() {
     super.init();
     this.setupPlaneObjects();
+    this.startAnimations();
+  }
+
+  startAnimations() {
+    const animation = new Animation({
+      func: () => {
+        this.render();
+      },
+      duration: `infinite`,
+      fps: 60,
+    });
+    animation.start();
+  }
+
+  startHueAnimation(name) {
+    const {uHue, uTimeHue, uEasingHue} = this.getOptions(name);
+    const plane = this.scene.children.filter((item) => {
+      return item.name === name;
+    });
+    const material = plane[0].material;
+    const animation = new Animation({
+      func: (progress) => {
+        material.uniforms.uHue.value = Math.cos((progress * 100) / 10) * -uHue;
+        material.needsUpdate = true;
+      },
+      duration: uTimeHue,
+      easing: uEasingHue
+    });
+    animation.start();
+  }
+
+  setEffect(slideName) {
+    this.startHueAnimation(slideName);
+  }
+
+  getOptions(slideName) {
+    let options;
+
+    for (let item of PLANES) {
+      if (item.name !== slideName) {
+        continue;
+      }
+      options = item.params;
+      break;
+    }
+
+    return options;
   }
 
   createPlaneObject(texture, options) {
-    const {width, height, position, uFilter} = options;
+    const {width, height, position, name, uHue, uTimeHue, uEasingHue} = options;
     const geometry = new THREE.PlaneBufferGeometry(width, height);
     let material;
-    if (uFilter) {
+    if (uHue) {
       const shaderOptions = {
-        uFilter,
+        uHue,
+        uTimeHue,
+        uEasingHue,
         uCanvasSize: [window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio]
       };
       material = new CustomMaterial(texture, shaderOptions);
@@ -65,6 +120,7 @@ export default class PlaneView extends Setup3D {
       });
     }
     const plane = new THREE.Mesh(geometry, material);
+    plane.name = name;
     plane.position.x = position;
 
     this.scene.add(plane);
@@ -80,7 +136,10 @@ export default class PlaneView extends Setup3D {
             width: this.planeWidth,
             height: this.planeHeight,
             position: this.planeWidth * i,
-            uFilter: item.uFilter
+            name: item.name,
+            uHue: item.hasOwnProperty(`params`) ? item.params.uHue : ``,
+            uTimeHue: item.hasOwnProperty(`params`) ? item.params.uTimeHue : ``,
+            uEasingHue: item.hasOwnProperty(`params`) ? item.params.uEasingHue : ``
           });
       this.planePositions[item.name] = this.planeWidth * i;
     });

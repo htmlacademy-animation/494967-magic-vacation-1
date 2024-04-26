@@ -17,7 +17,7 @@ const PLANES = [
     name: `story2`,
     url: `img/scenes-textures/scene-2.png`,
     params: {
-      uHue: 0.2,
+      uHue: 0.09,
       uTimeHue: 2000,
       uEasingHue: _.easeOutSine
     }
@@ -29,6 +29,24 @@ const PLANES = [
   {
     name: `story4`,
     url: `img/scenes-textures/scene-4.png`,
+  }
+];
+
+const BUBBLES = [
+  {
+    position: [0.2, 0.6],
+    size: 0.3,
+    delay: 0.55
+  },
+  {
+    position: [0.45, 0.8],
+    size: 0.5,
+    delay: 0.5
+  },
+  {
+    position: [0.5, 0.5],
+    size: 0.2,
+    delay: 0.6
   }
 ];
 
@@ -73,7 +91,7 @@ export default class PlaneView extends Setup3D {
       return item.name === name;
     });
     const material = plane[0].material;
-    const animation = new Animation({
+    const animationHue = new Animation({
       func: (progress) => {
         material.uniforms.uHue.value = Math.cos((progress * 100) / 10) * -uHue;
         material.needsUpdate = true;
@@ -81,7 +99,34 @@ export default class PlaneView extends Setup3D {
       duration: uTimeHue,
       easing: uEasingHue
     });
-    animation.start();
+
+    const animationBubbles = new Animation({
+      func: (progress) => {
+        const progressReversed = 1 - progress;
+        const startOffsetY = 1;
+
+        material.uniforms.bubbles.value = BUBBLES.reduce((acc, item) => {
+          const amplitude = item.size / 10
+          * Math.pow(progressReversed, 1)
+          * Math.sin(progress * Math.PI * 35);
+          const offsetX = Math.cos((progressReversed * 100) / 10) * amplitude;
+          const x = item.position[0] + offsetX;
+          const y = item.position[1] - startOffsetY * item.delay * 2.5 + progress * item.position[1] * 10;
+
+          const blobParams = {
+            size: item.size,
+            position: new THREE.Vector2(x, y)
+          };
+          acc.push(blobParams);
+          return acc;
+        }, []);
+        material.needsUpdate = true;
+      },
+      duration: 6000,
+    });
+
+    animationHue.start();
+    animationBubbles.start();
   }
 
   setEffect(slideName) {
@@ -111,6 +156,7 @@ export default class PlaneView extends Setup3D {
         uHue,
         uTimeHue,
         uEasingHue,
+        uBubbles: BUBBLES,
         uCanvasSize: [window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio]
       };
       material = new CustomMaterial(texture, shaderOptions);

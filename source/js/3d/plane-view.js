@@ -56,9 +56,9 @@ export default class PlaneView extends Setup3D {
       canvas: `animation-screen`,
       color: new THREE.Color(0x5f458c),
       alpha: 1,
-      far: 1600,
+      far: 750,
       near: 1,
-
+      fov: 35
     });
     this.screenPlaneName = ``;
     this.planeWidth = 2048;
@@ -107,8 +107,8 @@ export default class PlaneView extends Setup3D {
 
         material.uniforms.bubbles.value = BUBBLES.reduce((acc, item) => {
           const amplitude = item.size / 10
-          * Math.pow(progressReversed, 1)
-          * Math.sin(progress * Math.PI * 35);
+            * Math.pow(progressReversed, 1)
+            * Math.sin(progress * Math.PI * 35);
           const offsetX = Math.cos((progressReversed * 100) / 10) * amplitude;
           const x = item.position[0] + offsetX;
           const y = item.position[1] - startOffsetY * item.delay * 2.5 + progress * item.position[1] * 10;
@@ -191,11 +191,70 @@ export default class PlaneView extends Setup3D {
     });
   }
 
+  getSphere() {
+    const geometry = new THREE.SphereGeometry(100, 100, 32);
+
+    const material = new THREE.MeshStandardMaterial({
+      color: 0x4f4f4f,
+      metalness: 0.5,
+      emissive: 0x613583,
+      roughness: 0.3
+    });
+
+    return new THREE.Mesh(geometry, material);
+  }
+
   setPlane(name) {
     if (!this.planePositions.hasOwnProperty(name)) {
       return;
     }
     this.camera.position.x = this.planePositions[name];
+    this.scene.add(this.getSphere());
+    this.setLight();
     this.render();
+  }
+
+  setLight() {
+    const light = this.getLight();
+
+    light.position.z = this.camera.position.z;
+    this.scene.add(light);
+  }
+
+  getLight() {
+    const light = new THREE.Group();
+
+    // Light 1 Directional
+    const rad = (15 * Math.PI) / 180;
+    const light1 = new THREE.DirectionalLight(0xffffff, 0.84);
+
+    const targetObject = new THREE.Object3D();
+    targetObject.position.y = this.camera.position.z * Math.tan(rad);
+    this.scene.add(targetObject);
+    light1.target = targetObject;
+
+    // Light 2 Point
+    const light2 = new THREE.PointLight(
+        new THREE.Color(`rgb(246, 242, 255)`),
+        0.6,
+        975,
+        2
+    );
+
+    light2.position.set(-785, -350, -710);
+
+    // Light 3 Point
+    const light3 = new THREE.PointLight(
+        new THREE.Color(`rgb(245, 254, 255)`),
+        0.95,
+        1300, // немного увеличила радиус затухания, чтобы был виден свет
+        2
+    );
+
+    light3.position.set(730, 800, -985);
+
+    light.add(light1, light2, light3);
+
+    return light;
   }
 }
